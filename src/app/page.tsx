@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: "Sadbhav Neuropsychiatry Clinic",
     images: [
       {
-        url: "/images/sadbhav/team-itemm.jpg", // Make sure to create this image
+        url: "https://www.psychiatristinsurat.in/images/sadbhav/team-itemm.jpg", // Make sure to create this image
         width: 630,
         height: 630,
         alt: "Dr. Jash Ajmera - Sadbhav Neuropsychiatry Clinic in Surat",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Dr. Jash Ajmera | Best Psychiatrist in Surat, Gujarat",
     description: "Leading psychiatrist in Surat offering expert mental health care at Sadbhav Neuropsychiatry Clinic. Book an appointment today.",
-    images: ["/images/twitter-image.jpg"], // Create this image
+    images: ["https://www.psychiatristinsurat.in/images/twitter-image.jpg"], // Create this image
   },
   
   // Other important meta tags
