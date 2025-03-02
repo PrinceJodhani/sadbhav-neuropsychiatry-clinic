@@ -104,7 +104,7 @@ const AboutSectionOne = () => {
               <motion.div variants={itemVariants}>
               <div className="inline-flex items-center rounded-full mt-2 bg-primary/10 px-4 py-1 text-sm font-medium text-primary mb-6">
                   <span className="mr-2">✦</span>
-                  Psychiatrist & Psychotherapist, M.B.B.S., D.P.M. (PSYCHIATRY)
+                  Psychiatrist & Psychotherapist, <br></br> M.B.B.S., D.P.M. (PSYCHIATRY)
                 </div>
                 <SectionTitle
                   title="About Dr. Jash Ajmera"
@@ -120,7 +120,7 @@ const AboutSectionOne = () => {
                
                 
                 <p className="text-gray-700 dark:text-gray-200 mb-6 leading-relaxed">
-                  With over 7 years of experience, Dr. Jash Ajmera is a trusted psychiatrist in Surat, specializing in personalized mental health care. Since 2017, he has been actively involved in the National Mental Health Programme and community outreach across Gujarat, with a mission to make quality psychiatric services accessible to all.
+                  Dr. Jash Ajmera is a trusted psychiatrist in Surat, specializing in personalized mental health care. Since 2017, he has been actively involved in the National Mental Health Programme and community outreach across Gujarat, with a mission to make quality psychiatric services accessible to all.
                 </p>
                 
                 {/* Key Highlights as List */}

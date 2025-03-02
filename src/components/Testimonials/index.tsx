@@ -21,6 +21,24 @@ const testimonialData: Testimonial[] = [
     image: "/images/testimonials/placeholder2.png",
     star: 5,
   },
+  {
+    id: 3,
+    name: "Hardeepsinh Jadeja",
+    designation: "Patient",
+    content:
+      "Listens patiently , nice appointment management , explained treatment.He found out some issue which other doctors couldn't and so recovery was fast.Thanks Dr Jash. Highly recommended",
+    image: "/images/testimonials/placeholder2.png",
+    star: 5,
+  },
+  {
+    id: 4,
+    name: "Mayank Mehta",
+    designation: "Patient",
+    content:
+      "Personalised attention and quick response by doctor Jash Ajmera Sir",
+    image: "/images/testimonials/placeholder2.png",
+    star: 5,
+  },
 ];
 
 const Testimonials = () => {
