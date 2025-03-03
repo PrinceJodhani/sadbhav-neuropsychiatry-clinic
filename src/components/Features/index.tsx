@@ -55,7 +55,7 @@ const Features = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.6, duration: 0.5 }}
-            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-base font-medium text-white transition-all hover:bg-primary/90 hover:shadow-lg dark:hover:bg-primary/80"
+            className="inline-flex dark:text-gray-900 items-center justify-center rounded-full bg-primary px-6 py-3 text-base font-medium text-white transition-all hover:bg-primary/90 hover:shadow-lg dark:hover:bg-primary/80"
           >
             <svg 
               className="mr-2 h-5 w-5" 
