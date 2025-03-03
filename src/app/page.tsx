@@ -1,5 +1,7 @@
 // src/app/page.tsx
 import AboutSectionOne from "@/components/About/AboutSectionOne";
+import Blog from "@/components/Blog";
+import BlogSection from "@/components/BlogSection";
 import ScrollUp from "@/components/Common/ScrollUp";
 import Faqs from "@/components/Faqs";
 import Features from "@/components/Features";
@@ -155,6 +157,25 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+        <a 
+  style={{
+    position: "fixed",
+    bottom: "20px", 
+    left: "20px",
+    zIndex: "999",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    borderRadius: "7px",
+    backgroundColor: "white"
+
+  }} 
+  target="_blank" 
+  href="https://sadbhavneuropsychiatryclinic.setmore.com"
+>
+  <img  
+    src="https://assets.setmore.com/setmore/images/2.0/Settings/book-now-black.svg" 
+    alt="Click here to book the appointment using setmore" 
+  />
+</a>
       <ScrollUp />
       <Hero />
       <Stats />
@@ -165,6 +186,8 @@ export default function Home() {
       {/* <AboutSectionTwo /> */}
       <Testimonials />
       <FindUs />
+      <BlogSection />
+
       <Faqs />
       {/* <Pricing /> */}
       {/* <Blog /> */}
