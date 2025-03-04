@@ -67,7 +67,7 @@ export async function getLatestThreeBlogs() {
         FROM mentalhealth
         WHERE email = 'ajmera.jash@gmail.com'
         ORDER BY id DESC
-        LIMIT 3
+        LIMIT 7
       `);
       return result.rows;
     } catch (error) {
