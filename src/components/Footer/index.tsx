@@ -187,7 +187,7 @@ const Footer = () => {
               </h2>
               <Link
                 href="tel:+917861024557"
-                className="inline-flex items-center dark:text-white rounded-full bg-gray-50 px-4 py-2 text-gray-700 transition-colors hover:bg-primary hover:text-white dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-primary"
+                className="inline-flex items-center dark:text-white rounded-full bg-gray-50 px-4 py-2 text-gray-700 transition-colors hover:bg-primary hover:text-white dark:bg-gray-800 dark:hover:text-gray-900 dark:text-gray-200 dark:hover:bg-primary"
               >
                 <PhoneCall className="mr-2 h-4 w-4" />
                 +91 7861024557

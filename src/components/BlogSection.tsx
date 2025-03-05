@@ -192,7 +192,7 @@ const BlogSection = () => {
         <motion.div variants={itemVariants} className="text-center">
           <Link
             href="/blogs"
-            className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-base font-medium text-white transition-all hover:bg-primary/90 hover:shadow-lg dark:hover:bg-primary/80"
+            className="inline-flex items-center dark:text-gray-900 justify-center rounded-full bg-primary px-6 py-3 text-base font-medium text-white transition-all hover:bg-primary/90 hover:shadow-lg dark:hover:bg-primary/80"
           >
             View All Articles
             <svg

@@ -6,6 +6,7 @@ import ScrollUp from "@/components/Common/ScrollUp";
 import Faqs from "@/components/Faqs";
 import Features from "@/components/Features";
 import FindUs from "@/components/FindUs";
+import GoogleRating from "@/components/GoogleRating";
 import Hero from "@/components/Hero";
 import InstagramFeed from "@/components/InstagramFeed";
 import Stats from "@/components/Stats";
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Dr. Jash Ajmera | Best Psychiatrist in Surat, Gujarat",
     description: "Leading psychiatrist in Surat offering expert mental health care at Sadbhav Neuropsychiatry Clinic. Book an appointment today.",
-    images: ["https://www.psychiatristinsurat.in/images/twitter-image.jpg"], // Create this image
+    images: ["https://www.psychiatristinsurat.in/images/twitter-image.jpg"], 
   },
   
   // Other important meta tags
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   
   // Verification for search engines
   verification: {
-    google: "your-google-verification-code", // Replace with your verification code
+    google: "3qDat_WFqV5e8yN7FV2Sr2Qc7m6SLUg4Z2xYJO0U2kQ", 
   },
   
   // Apple web app capabilities
@@ -109,25 +110,25 @@ export const metadata: Metadata = {
         "@type": "MedicalBusiness",
         "name": "Sadbhav Neuropsychiatry Clinic",
         "url": "https://psychiatristinsurat.in",
-        "logo": "https://psychiatristinsurat.in/images/sadbhav/main-logo.png", // Create this logo
-        "image": "https://psychiatristinsurat.in/images/sadbhav/team-itemm.jpg", // Create this image
+        "logo": "https://psychiatristinsurat.in/images/sadbhav/main-logo.png",  
+        "image": "https://psychiatristinsurat.in/images/sadbhav/team-itemm.jpg", 
         "description": "Leading psychiatric clinic in Surat offering expert mental health care by Dr. Jash Ajmera.",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Your clinic address", // Replace with actual address
+          "streetAddress": "209 vesu point, Vesu Main Road, above HDFC Bank, opp. vijya laxmi hall, Surat, Gujarat 395007", 
           "addressLocality": "Surat",
           "addressRegion": "Gujarat",
-          "postalCode": "Your postal code", // Replace with actual postal code
+          "postalCode": "395007", 
           "addressCountry": "IN"
         },
         "geo": {
           "@type": "GeoCoordinates",
-          "latitude": 21.149622879128152, // Replace with actual coordinates
-          "longitude": 72.77271745370379 // Replace with actual coordinates
+          "latitude": 21.149622879128152, 
+          "longitude": 72.77271745370379 
         },
         
-        "telephone": "+917861024557", // Replace with actual phone number
-        "email": "support@aarogyaminds.com", // Replace with actual email
+        "telephone": "+917861024557",
+        "email": "support@aarogyaminds.com", 
         "openingHoursSpecification": [
           {
             "@type": "OpeningHoursSpecification",
@@ -148,8 +149,13 @@ export const metadata: Metadata = {
           "name": "Sadbhav Neuropsychiatry Clinic"
         },
         "knowsAbout": ["Depression", "Anxiety", "Bipolar Disorder", "Schizophrenia", "Mental Health"],
-        "image": "https://psychiatristinsurat.in/images/sadbhav/team-itemm.jpg", // Create this image
-        "description": "Dr. Jash Ajmera is a leading psychiatrist in Surat with expertise in treating various mental health conditions."
+        "image": "https://psychiatristinsurat.in/images/sadbhav/team-itemm.jpg",
+        "description": "Dr. Jash Ajmera is a leading psychiatrist in Surat with expertise in treating various mental health conditions.",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": 4.9,
+          "reviewCount": 278
+        }
       }
     ])
   }
@@ -192,6 +198,12 @@ export default async function Home() {
     posts = []; // Fallback to empty array on error
   }
 
+
+
+// Define manual rating and review count
+const rating = 4.9;
+const reviewCount = 278;
+
   return (
     <>
         <a 
@@ -215,6 +227,7 @@ export default async function Home() {
 </a>
       <ScrollUp />
       <Hero />
+      <GoogleRating rating={rating} reviewCount={reviewCount} /> {/* Add GoogleRating here */}
       <Stats />
       <Features />
       <Video />
