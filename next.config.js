@@ -13,6 +13,12 @@ const nextConfig = {
         hostname: "res.cloudinary.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "scontent*.cdninstagram.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

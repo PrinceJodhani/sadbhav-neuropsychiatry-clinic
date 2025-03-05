@@ -19,7 +19,7 @@ const featuresData: Feature[] = [
     bgColor: "bg-green-600",
     link: {
       text: "Download Brochure",
-      href: "/path-to-brochure.pdf",
+      href: "/Psychotherapy-by-Dr-Jash-Ajmera.pdf",
     },
   },
   {
