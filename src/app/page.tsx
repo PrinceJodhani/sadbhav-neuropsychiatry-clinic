@@ -8,7 +8,7 @@ import Features from "@/components/Features";
 import FindUs from "@/components/FindUs";
 import GoogleRating from "@/components/GoogleRating";
 import Hero from "@/components/Hero";
-import InstagramFeed from "@/components/InstagramFeed";
+import InstagramFeedFinal from "@/components/InstagramFeedFinal";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import Video from "@/components/Video";
@@ -163,40 +163,10 @@ export const metadata: Metadata = {
 
 
 
-// Define the type for Instagram posts
-type InstagramPost = {
-  id: string;
-  caption?: string;
-  media_type: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
-  media_url: string;
-  permalink: string;
-};
-
 
 export default async function Home() {
 
-  let posts: InstagramPost[] = [];
-
-  try {
-    const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN;
-    if (!accessToken) {
-      throw new Error("Instagram access token is not defined.");
-    }
-
-    const response = await fetch(
-      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink&access_token=${accessToken}&limit=9`
-    );
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch Instagram posts");
-    }
-
-    const data = await response.json();
-    posts = data.data || [];
-  } catch (error) {
-    console.error("Error fetching Instagram posts:", error);
-    posts = []; // Fallback to empty array on error
-  }
+  
 
 
 
@@ -237,7 +207,17 @@ const reviewCount = 278;
       <Testimonials />
       <FindUs />
       <BlogSection />
-      <InstagramFeed posts={posts} /> {/* Add the InstagramFeed component */}
+      {/* <InstagramFeed posts={posts} />  */}
+     
+{/* <script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div className="elfsight-app-a76388dd-9ab2-4e8b-adb2-ddb0d4d514cb" data-elfsight-app-lazy></div> */}
+{/* LightWidget WIDGET */}
+{/* 
+<script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+<iframe src="//lightwidget.com/widgets/00af9b5725345d9cadb7896f8ee3a1c2.html" scrolling="no"  className="lightwidget-widget" style={{ width: "100%" , border: "0", overflow: "hidden" }}></iframe>
+       */}
+
+       <InstagramFeedFinal /> 
       <Faqs />
       {/* <Pricing /> */}
       {/* <Blog /> */}
