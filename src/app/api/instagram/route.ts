@@ -212,7 +212,7 @@ import { NextResponse } from 'next/server';
 import chromium from 'chrome-aws-lambda';
 import type { Browser } from 'puppeteer';
 
-// Define interfaces for Instagram data
+// Interfaces for Instagram data
 interface InstagramPost {
   id: string;
   url: string;
@@ -302,11 +302,11 @@ async function scrapeInstagramProfile(username: string): Promise<InstagramProfil
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_VERSION) {
     // Production: Use puppeteer-core with chrome-aws-lambda
     const executablePath = await chromium.executablePath;
-    browser = (await (await import('puppeteer-core')).launch({
+    browser = await (await import('puppeteer-core')).launch({
       args: chromium.args,
       executablePath: executablePath, // Must be provided in production
       headless: true,
-    })) as unknown as Browser;
+    }) as unknown as Browser;
   } else {
     // Development: Use full puppeteer which includes its own Chromium
     const puppeteer = await import('puppeteer');
@@ -338,7 +338,7 @@ async function scrapeInstagramProfile(username: string): Promise<InstagramProfil
         } else {
           await page.mouse.click(10, 10);
         }
-        // Delay using Promise-based timeout
+        // Delay using a Promise-based timeout
         await new Promise((resolve) => setTimeout(resolve, 2000));
       }
     } catch (err) {
