@@ -207,15 +207,15 @@ const reviewCount = 278;
       <BlogSection />
       {/* <InstagramFeed posts={posts} />  */}
      
-{/* <script src="https://static.elfsight.com/platform/platform.js" async></script>
-<div className="elfsight-app-a76388dd-9ab2-4e8b-adb2-ddb0d4d514cb" data-elfsight-app-lazy></div> */}
+<script src="https://static.elfsight.com/platform/platform.js" async></script>
+<div className="elfsight-app-a76388dd-9ab2-4e8b-adb2-ddb0d4d514cb" data-elfsight-app-lazy></div>
 {/* LightWidget WIDGET */}
 {/* 
 <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
 <iframe src="//lightwidget.com/widgets/00af9b5725345d9cadb7896f8ee3a1c2.html" scrolling="no"  className="lightwidget-widget" style={{ width: "100%" , border: "0", overflow: "hidden" }}></iframe>
        */}
 
-       <InstagramFeedFinal /> 
+       {/* <InstagramFeedFinal />  */}
       <Faqs />
       {/* <Pricing /> */}
       {/* <Blog /> */}
