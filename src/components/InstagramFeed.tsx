@@ -6,7 +6,6 @@ import { Heart, MessageCircle, MoreHorizontal, Bookmark, Share2 } from 'lucide-r
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 
-// Types remain the same as your original code
 interface InstagramPost {
   id: string;
   url: string;
@@ -43,6 +42,7 @@ export function InstagramFeed({ username }: { username: string }) {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [debugInfo, setDebugInfo] = useState<any>(null);
 
   const fetchInstagramData = async (page = 0) => {
     try {
@@ -54,49 +54,72 @@ export function InstagramFeed({ username }: { username: string }) {
         setLoadingMore(true);
       }
       
-      const response = await fetch(`/api/instagram?username=${username}&page=${page}&limit=6`);
+      const apiUrl = `/api/instagram?username=${encodeURIComponent(username)}&page=${page}&limit=6`;
+      console.log(`Fetching from: ${apiUrl}`);
       
-      if (!response.ok) {
-        throw new Error('Failed to fetch Instagram data');
+      const response = await fetch(apiUrl);
+      
+      // Capture response details for debugging
+      const responseStatus = response.status;
+      const responseStatusText = response.statusText;
+      let responseBody = null;
+      
+      try {
+        // Try to get response as text first to avoid parsing errors
+        const responseText = await response.text();
+        try {
+          // Then try to parse as JSON
+          responseBody = JSON.parse(responseText);
+        } catch (e) {
+          // If parsing fails, use the text
+          responseBody = responseText;
+        }
+      } catch (e) {
+        responseBody = "Could not read response body";
       }
       
-      const data = await response.json();
-
-      // Modify the setProfile call in else block:
-setProfile(prev => {
-    if (!prev) return data;
-    
-    const newPosts = data.posts.filter(
-      newPost => !prev.posts.some(existingPost => existingPost.id === newPost.id)
-    );
-  
-    return {
-      ...prev, // Keep existing profile data
-      posts: [...prev.posts, ...newPosts],
-      hasMore: data.hasMore
-    };
-  });
-  
+      // Log the response data
+      const debugData = {
+        url: apiUrl,
+        status: responseStatus,
+        statusText: responseStatusText,
+        body: responseBody
+      };
       
+      console.log("API Response:", debugData);
+      setDebugInfo(debugData);
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch Instagram data: ${responseStatus} ${responseStatusText}`);
+      }
+      
+      // If responseBody is already parsed, use it
+      const data = typeof responseBody === 'object' ? responseBody : await response.json();
+
       if (isInitialFetch) {
         setProfile(data);
       } else {
         setProfile(prev => {
           if (!prev) return data;
+          
+          const newPosts = data.posts.filter(
+            newPost => !prev.posts.some(existingPost => existingPost.id === newPost.id)
+          );
+          
           return {
-            ...data,
-            posts: [...prev.posts, ...data.posts]
+            ...prev,
+            posts: [...prev.posts, ...newPosts],
+            hasMore: data.hasMore
           };
         });
       }
     } catch (err) {
+      console.error("Error fetching Instagram data:", err);
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
     } finally {
       setLoading(false);
       setLoadingMore(false);
     }
-
-    
   };
 
   useEffect(() => {
@@ -142,6 +165,22 @@ setProfile(prev => {
         <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-200 px-6 py-4 rounded-xl">
           <p className="font-medium">Error: {error}</p>
           <p className="mt-2 text-sm">Please ensure the Instagram username is correct and the profile is public.</p>
+          
+          {debugInfo && (
+            <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-xs font-mono overflow-auto">
+              <p>Debug Information:</p>
+              <pre>{JSON.stringify(debugInfo, null, 2)}</pre>
+            </div>
+          )}
+          
+          <div className="mt-4">
+            <Button 
+              onClick={() => fetchInstagramData()} 
+              className="bg-red-100 hover:bg-red-200 text-red-800 dark:bg-red-800/30 dark:hover:bg-red-800/50 dark:text-red-300"
+            >
+              Retry
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -152,6 +191,22 @@ setProfile(prev => {
       <div className="max-w-4xl mx-auto p-4">
         <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-200 px-6 py-4 rounded-xl">
           <p className="font-medium">No profile data found.</p>
+          
+          {debugInfo && (
+            <div className="mt-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg text-xs font-mono overflow-auto">
+              <p>Debug Information:</p>
+              <pre>{JSON.stringify(debugInfo, null, 2)}</pre>
+            </div>
+          )}
+          
+          <div className="mt-4">
+            <Button 
+              onClick={() => fetchInstagramData()} 
+              className="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/50 dark:text-yellow-300"
+            >
+              Retry
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -191,9 +246,6 @@ setProfile(prev => {
                     Message
                     </a>
                   </Button>
-                  {/* <Button variant="outline" size="icon">
-                    <MoreHorizontal className="h-4 w-4" />
-                  </Button> */}
                 </div>
               </div>
               
