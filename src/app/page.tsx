@@ -8,6 +8,7 @@ import Features from "@/components/Features";
 import FindUs from "@/components/FindUs";
 import GoogleRating from "@/components/GoogleRating";
 import Hero from "@/components/Hero";
+import { InstagramFeed } from "@/components/InstagramFeed";
 import InstagramFeedFinal from "@/components/InstagramFeedFinal";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
@@ -195,6 +196,7 @@ const reviewCount = 278;
 </a>
       <ScrollUp />
       <Hero />
+     
       <GoogleRating rating={rating} reviewCount={reviewCount} /> {/* Add GoogleRating here */}
       <Stats />
       <Features />
@@ -205,18 +207,18 @@ const reviewCount = 278;
       <Testimonials />
       <FindUs />
       <BlogSection />
-      {/* <InstagramFeed posts={posts} />  */}
-     
-<script src="https://static.elfsight.com/platform/platform.js" async></script>
-<div className="elfsight-app-a76388dd-9ab2-4e8b-adb2-ddb0d4d514cb" data-elfsight-app-lazy></div>
-{/* LightWidget WIDGET */}
-{/* 
-<script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-<iframe src="//lightwidget.com/widgets/00af9b5725345d9cadb7896f8ee3a1c2.html" scrolling="no"  className="lightwidget-widget" style={{ width: "100%" , border: "0", overflow: "hidden" }}></iframe>
-       */}
+       {/* <InstagramFeed username={'sadbhav_clinic'} /> */}
+       <div className="container mx-auto py-8 px-4">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-bold">Follow Us on Instagram</h2>
+        <p className="text-gray-600 mt-2">Stay updated with our latest news and events</p>
+      </div>
+      <InstagramFeed username={'sadbhav_clinic'} />
+    </div>
 
        {/* <InstagramFeedFinal />  */}
       <Faqs />
+      
       {/* <Pricing /> */}
       {/* <Blog /> */}
       {/* <Contact /> */}

@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["localhost"],
+    domains: [
+      "localhost",
+      "fbcdn.net",
+      "instagram.com",
+      "scontent.cdninstagram.com",
+      "scontent-iad3-1.cdninstagram.com",
+      "psychiatristinsurat.in",
+      "instagram.com",
+      "instagram.famd1-2.fna.fbcdn.net",
+    ],
     remotePatterns: [
       {
         protocol: "https",
@@ -19,7 +28,22 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "**.cdninstagram.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.fbcdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "instagram.famd1-2.fna.fbcdn.net",
+      },
     ],
+  },
+  experimental: {
+    serverExternalPackages: ["puppeteer"],
   },
 };
 
