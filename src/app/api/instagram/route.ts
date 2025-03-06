@@ -127,7 +127,7 @@ async function scrapeInstagramProfile(username: string): Promise<InstagramProfil
         } else {
           await page.mouse.click(10, 10);
         }
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        await new Promise(resolve => setTimeout(resolve, 5000));
       }
     } catch (error) {
       console.log('No login popup found or failed to dismiss it:', error);
