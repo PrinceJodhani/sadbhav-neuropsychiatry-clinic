@@ -10,6 +10,7 @@ const nextConfig = {
       "psychiatristinsurat.in",
       "instagram.com",
       "instagram.famd1-2.fna.fbcdn.net",
+      'instagram.fcdn.net',
     ],
     remotePatterns: [
       {
@@ -39,6 +40,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "instagram.famd1-2.fna.fbcdn.net",
+      },
+      {
+        protocol: "https",
+        hostname: "instagram.fcdn.net",
       },
     ],
   },

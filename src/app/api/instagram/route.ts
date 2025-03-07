@@ -463,11 +463,10 @@
 
 
 
-import { NextResponse } from 'next/server';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 
-// Define interfaces for our data
+import { NextResponse } from 'next/server';
+import { chromium } from 'playwright';
+
 interface InstagramPost {
   id: string;
   url: string;
@@ -488,250 +487,84 @@ interface InstagramProfile {
   posts: InstagramPost[];
 }
 
-interface CachedData {
-  profile: InstagramProfile;
-  timestamp: number;
-  allPosts: InstagramPost[];
-}
-
-// Cache data
-let profileCache: Record<string, CachedData> = {};
-const CACHE_TTL = 1000 * 60 * 60; // 1 hour
-
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get('username');
-    const page = parseInt(searchParams.get('page') || '0');
-    const postsPerPage = parseInt(searchParams.get('limit') || '6');
-    
     if (!username) {
-      return NextResponse.json({ error: 'Username parameter is required' }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Username parameter is required' },
+        { status: 400 }
+      );
     }
-    
-    const now = Date.now();
-    let profileData: InstagramProfile;
-    let allPosts: InstagramPost[];
-    
-    // Check if we have valid cached data
-    if (
-      profileCache[username] && 
-      now - profileCache[username].timestamp < CACHE_TTL
-    ) {
-      console.log(`Using cached data for ${username}`);
-      profileData = profileCache[username].profile;
-      allPosts = profileCache[username].allPosts;
-    } else {
-      // Fetch new data
-      console.log(`Fetching fresh data for ${username}`);
-      const result = await scrapeInstagramProfile(username);
-      profileData = result.profile;
-      allPosts = result.posts;
-      
-      // Update cache
-      profileCache[username] = {
-        profile: profileData,
-        allPosts,
-        timestamp: now
-      };
-    }
-    
-    // Get paginated posts
-    const startIndex = page * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
-    const paginatedPosts = allPosts.slice(startIndex, endIndex);
-    const hasMore = endIndex < allPosts.length;
-    
-    return NextResponse.json({
-      ...profileData,
-      posts: paginatedPosts,
-      hasMore
+
+    // Launch Playwright's Chromium instance with no sandbox (helpful in serverless)
+    const browser = await chromium.launch({
+      args: ['--no-sandbox']
     });
-    
+    const page = await browser.newPage();
+
+    // Navigate to the Instagram profile page
+    await page.goto(`https://www.instagram.com/${username}/`, {
+      waitUntil: 'networkidle'
+    });
+
+    // Wait for posts to load. This selector is based on Instagram's structure.
+    await page.waitForSelector('article a[href*="/p/"]', { timeout: 10000 });
+
+    // Extract posts data from the rendered page
+    const posts: InstagramPost[] = await page.evaluate(() => {
+      const postElements = document.querySelectorAll('article a[href*="/p/"]');
+      const postsArray: InstagramPost[] = [];
+      postElements.forEach((el) => {
+        const anchor = el as HTMLAnchorElement;
+        const href = anchor.href;
+        const idMatch = href.match(/\/p\/([^\/]+)\//);
+        const id = idMatch ? idMatch[1] : '';
+        const img = anchor.querySelector('img');
+        const thumbnailUrl = img ? img.src : '';
+        const caption = img ? img.alt : '';
+        // Note: likes and comments are not readily available in the static rendered content.
+        postsArray.push({
+          id,
+          url: href,
+          thumbnailUrl,
+          caption,
+          likes: 0,
+          comments: 0
+        });
+      });
+      return postsArray;
+    });
+
+    // Extract basic profile info.
+    // Use meta tag for profile picture.
+    const profilePicUrl =
+      (await page.getAttribute('meta[property="og:image"]', 'content')) || '';
+    // Use the page title to heuristically extract full name.
+    const title = await page.title();
+    const fullName = title.split('•')[0].trim();
+
+    await browser.close();
+
+    // Build profile object (bio, followers, and following are omitted here)
+    const profile: InstagramProfile = {
+      username,
+      fullName,
+      profilePicUrl,
+      bio: '', // You can add extra logic to extract the bio if needed.
+      postsCount: posts.length,
+      followersCount: 0, // Not extracted in this example.
+      followingCount: 0, // Not extracted in this example.
+      posts
+    };
+
+    return NextResponse.json(profile);
   } catch (error) {
-    console.error('Instagram API error:', error);
+    console.error('Error scraping Instagram with Playwright:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch Instagram data' }, 
+      { error: 'Failed to scrape Instagram data' },
       { status: 500 }
     );
-  }
-}
-
-async function scrapeInstagramProfile(username: string): Promise<{ profile: InstagramProfile, posts: InstagramPost[] }> {
-  try {
-    // Make request with appropriate headers to avoid blocks
-    const response = await axios.get(`https://www.instagram.com/${username}/`, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-User': '?1',
-        'Upgrade-Insecure-Requests': '1'
-      },
-      timeout: 10000
-    });
-    
-    const html = response.data;
-    const $ = cheerio.load(html);
-    
-    // Try to find Instagram's shared data
-    let sharedData: any = null;
-    
-    // Look for JSON data in scripts
-    $('script').each((i, el) => {
-      const scriptContent = $(el).html() || '';
-      
-      // First try to find sharedData (older way)
-      if (scriptContent.includes('window._sharedData = ')) {
-        try {
-          const jsonText = scriptContent
-            .replace('window._sharedData = ', '')
-            .replace(/;$/, '');
-          sharedData = JSON.parse(jsonText);
-          return false; // break the loop
-        } catch (e) {
-          console.error('Error parsing sharedData:', e);
-        }
-      }
-      
-      // Then try to find additional_data (newer way)
-      if (scriptContent.includes('window.__additionalDataLoaded(')) {
-        try {
-          const match = scriptContent.match(/window\.__additionalDataLoaded\([^,]+,(.+)\);/);
-          if (match && match[1]) {
-            const jsonData = JSON.parse(match[1]);
-            sharedData = { entry_data: { ProfilePage: [{ graphql: jsonData }] } };
-            return false; // break the loop
-          }
-        } catch (e) {
-          console.error('Error parsing additionalData:', e);
-        }
-      }
-    });
-    
-    // If we couldn't get the data from scripts, fallback to manual HTML parsing
-    if (!sharedData || !sharedData.entry_data?.ProfilePage?.[0]?.graphql?.user) {
-      console.log('Falling back to HTML parsing');
-      
-      // Get profile pic
-      const profilePicUrl = $('meta[property="og:image"]').attr('content') || '';
-      
-      // Get basic profile info
-      const pageTitle = $('title').text() || '';
-      const fullName = pageTitle.split('•')[0].trim() || username;
-      
-      // Parse counts (this is fragile and might break with layout changes)
-      const statsText = $('ul li').map((i, el) => $(el).text()).get();
-      
-      // Helper function to parse counts
-      const parseCount = (text: string): number => {
-        if (!text) return 0;
-        
-        text = text.replace(/,/g, '').toLowerCase();
-        if (text.includes('k')) {
-          return parseFloat(text.replace(/k.*/, '')) * 1000;
-        } else if (text.includes('m')) {
-          return parseFloat(text.replace(/m.*/, '')) * 1000000;
-        } else {
-          const match = text.match(/\d+/);
-          return match ? parseInt(match[0]) : 0;
-        }
-      };
-      
-      let postsCount = 0, followersCount = 0, followingCount = 0;
-      
-      for (const stat of statsText) {
-        if (stat.includes('post')) postsCount = parseCount(stat);
-        else if (stat.includes('follower')) followersCount = parseCount(stat);
-        else if (stat.includes('following')) followingCount = parseCount(stat);
-      }
-      
-      // Get bio
-      const bioElement = $('div > span').filter((i, el) => {
-        return $(el).text().length > 10 && !$(el).find('a').length;
-      }).first();
-      const bio = bioElement.text() || '';
-      
-      // Get posts
-      const posts: InstagramPost[] = [];
-      
-      $('article a').each((i, el) => {
-        const href = $(el).attr('href') || '';
-        if (!href.includes('/p/')) return;
-        
-        const id = href.split('/p/')[1]?.replace(/\//g, '') || `post-${i}`;
-        const img = $(el).find('img');
-        const src = img.attr('src') || '';
-        const alt = img.attr('alt') || '';
-        
-        // Random placeholder for likes/comments since we can't easily get these
-        const randomLikes = Math.floor(Math.random() * 100) + 50;
-        const randomComments = Math.floor(Math.random() * 20) + 5;
-        
-        if (src) {
-          posts.push({
-            id,
-            url: href.startsWith('http') ? href : `https://www.instagram.com${href}`,
-            thumbnailUrl: src,
-            caption: alt,
-            likes: randomLikes,
-            comments: randomComments
-          });
-        }
-      });
-      
-      const profileData: InstagramProfile = {
-        username,
-        fullName,
-        profilePicUrl,
-        bio,
-        postsCount,
-        followersCount,
-        followingCount,
-        posts: []
-      };
-      
-      return { profile: profileData, posts };
-    }
-    
-    // Extract user data from the shared data
-    const userData = sharedData.entry_data.ProfilePage[0].graphql.user;
-    
-    // Format profile info
-    const profileData: InstagramProfile = {
-      username: userData.username,
-      fullName: userData.full_name,
-      profilePicUrl: userData.profile_pic_url_hd || userData.profile_pic_url,
-      bio: userData.biography || '',
-      postsCount: userData.edge_owner_to_timeline_media?.count || 0,
-      followersCount: userData.edge_followed_by?.count || 0,
-      followingCount: userData.edge_follow?.count || 0,
-      posts: []
-    };
-    
-    // Format posts
-    const edges = userData.edge_owner_to_timeline_media?.edges || [];
-    const posts = edges.map((edge: any) => {
-      const node = edge.node;
-      return {
-        id: node.id,
-        url: `https://www.instagram.com/p/${node.shortcode}/`,
-        thumbnailUrl: node.thumbnail_src || node.display_url,
-        caption: node.edge_media_to_caption?.edges?.[0]?.node?.text || '',
-        likes: node.edge_media_preview_like?.count || node.edge_liked_by?.count || 0,
-        comments: node.edge_media_to_comment?.count || 0
-      };
-    });
-    
-    return { profile: profileData, posts };
-    
-  } catch (error) {
-    console.error('Error scraping Instagram:', error);
-    throw new Error('Failed to fetch Instagram data');
   }
 }
