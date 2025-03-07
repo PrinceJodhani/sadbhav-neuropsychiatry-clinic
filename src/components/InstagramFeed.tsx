@@ -41,71 +41,110 @@ export function InstagramFeed({ username }: { username: string }) {
   const [fullProfile, setFullProfile] = useState<InstagramProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [loadingMore, setLoadingMore] = useState(false);
-  const [loadMoreClickCount, setLoadMoreClickCount] = useState(0);
-  const postsPerPage = 6;
+  // const [currentPage, setCurrentPage] = useState(0);
+  // const [loadingMore, setLoadingMore] = useState(false);
+  // const [loadMoreClickCount, setLoadMoreClickCount] = useState(0);
+  // const postsPerPage = 6;
 
-  const fetchInstagramData = async (page = 0) => {
+  const [visiblePosts, setVisiblePosts] = useState<InstagramPost[]>([]);
+const [loadMoreClicked, setLoadMoreClicked] = useState(false);
+
+
+  // const fetchInstagramData = async (page = 0) => {
+  //   try {
+  //     if (page === 0) {
+  //       setLoading(true);
+  //     } else {
+  //       setLoadingMore(true);
+  //     }
+  //     const response = await fetch('/instaurl.json');
+  //     if (!response.ok) {
+  //       throw new Error(`Failed to load data: ${response.status} ${response.statusText}`);
+  //     }
+  //     const data: InstagramProfile = await response.json();
+  //     // On initial load, store the full profile data and slice the first page
+  //     if (page === 0) {
+  //       setFullProfile(data);
+  //       const slicedPosts = data.posts.slice(0, postsPerPage);
+  //       // Always show hasMore as true for the first page, even if there aren't enough posts
+  //       setProfile({ ...data, posts: slicedPosts, hasMore: true });
+  //     } else {
+  //       if (!fullProfile) return;
+  //       const nextPosts = fullProfile.posts.slice(page * postsPerPage, (page + 1) * postsPerPage);
+  //       setProfile(prev => {
+  //         if (!prev) return { ...fullProfile, posts: nextPosts, hasMore: true };
+  //         const updatedPosts = [...prev.posts, ...nextPosts];
+  //         // Always show hasMore as true for the second page
+  //         return {
+  //           ...prev,
+  //           posts: updatedPosts,
+  //           hasMore: true
+  //         };
+  //       });
+  //     }
+  //   } catch (err) {
+  //     console.error("Error fetching Instagram data:", err);
+  //     setError(err instanceof Error ? err.message : 'An unknown error occurred');
+  //   } finally {
+  //     setLoading(false);
+  //     setLoadingMore(false);
+  //   }
+  // };
+  const fetchInstagramData = async () => {
     try {
-      if (page === 0) {
-        setLoading(true);
-      } else {
-        setLoadingMore(true);
-      }
+      setLoading(true);
       const response = await fetch('/instaurl.json');
       if (!response.ok) {
         throw new Error(`Failed to load data: ${response.status} ${response.statusText}`);
       }
       const data: InstagramProfile = await response.json();
-      // On initial load, store the full profile data and slice the first page
-      if (page === 0) {
-        setFullProfile(data);
-        const slicedPosts = data.posts.slice(0, postsPerPage);
-        // Always show hasMore as true for the first page, even if there aren't enough posts
-        setProfile({ ...data, posts: slicedPosts, hasMore: true });
-      } else {
-        if (!fullProfile) return;
-        const nextPosts = fullProfile.posts.slice(page * postsPerPage, (page + 1) * postsPerPage);
-        setProfile(prev => {
-          if (!prev) return { ...fullProfile, posts: nextPosts, hasMore: true };
-          const updatedPosts = [...prev.posts, ...nextPosts];
-          // Always show hasMore as true for the second page
-          return {
-            ...prev,
-            posts: updatedPosts,
-            hasMore: true
-          };
-        });
-      }
+      setProfile(data);
+      // Set initial visible posts to the first 4 posts
+      setVisiblePosts(data.posts.slice(0, 4));
     } catch (err) {
       console.error("Error fetching Instagram data:", err);
       setError(err instanceof Error ? err.message : 'An unknown error occurred');
     } finally {
       setLoading(false);
-      setLoadingMore(false);
     }
   };
+  
+
+  // useEffect(() => {
+  //   fetchInstagramData(0);
+  // }, [username]);
 
   useEffect(() => {
-    fetchInstagramData(0);
+    fetchInstagramData();
   }, [username]);
 
+  // const handleLoadMore = () => {
+  //   // Increment the click count
+  //   const newClickCount = loadMoreClickCount + 1;
+  //   setLoadMoreClickCount(newClickCount);
+    
+  //   // If this is the second click, redirect to Instagram profile
+  //   if (newClickCount >= 2) {
+  //     window.open(`https://www.instagram.com/${username}`, '_blank');
+  //     return;
+  //   }
+    
+  //   // Otherwise, load more posts
+  //   const nextPage = currentPage + 1;
+  //   setCurrentPage(nextPage);
+  //   fetchInstagramData(nextPage);
+  // };
+
   const handleLoadMore = () => {
-    // Increment the click count
-    const newClickCount = loadMoreClickCount + 1;
-    setLoadMoreClickCount(newClickCount);
-    
-    // If this is the second click, redirect to Instagram profile
-    if (newClickCount >= 2) {
+    if (!profile) return;
+    if (!loadMoreClicked) {
+      // Show all posts (assumes profile.posts contains all 12 posts)
+      setVisiblePosts(profile.posts);
+      setLoadMoreClicked(true);
+    } else {
+      // If already loaded, open the Instagram profile
       window.open(`https://www.instagram.com/${username}`, '_blank');
-      return;
     }
-    
-    // Otherwise, load more posts
-    const nextPage = currentPage + 1;
-    setCurrentPage(nextPage);
-    fetchInstagramData(nextPage);
   };
 
   if (loading) {
@@ -140,7 +179,7 @@ export function InstagramFeed({ username }: { username: string }) {
           <p className="font-medium">Error: {error}</p>
           <p className="mt-2 text-sm">Please ensure the Instagram data file exists in the public folder.</p>
           <div className="mt-4">
-            <Button onClick={() => fetchInstagramData(0)} className="bg-red-100 hover:bg-red-200 text-red-800 dark:bg-red-800/30 dark:hover:bg-red-800/50 dark:text-red-300">
+            <Button onClick={() => fetchInstagramData()} className="bg-red-100 hover:bg-red-200 text-red-800 dark:bg-red-800/30 dark:hover:bg-red-800/50 dark:text-red-300">
               Retry
             </Button>
           </div>
@@ -155,7 +194,7 @@ export function InstagramFeed({ username }: { username: string }) {
         <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-200 px-6 py-4 rounded-xl">
           <p className="font-medium">No profile data found.</p>
           <div className="mt-4">
-            <Button onClick={() => fetchInstagramData(0)} className="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/50 dark:text-yellow-300">
+            <Button onClick={() => fetchInstagramData()} className="bg-yellow-100 hover:bg-yellow-200 text-yellow-800 dark:bg-yellow-800/30 dark:hover:bg-yellow-800/50 dark:text-yellow-300">
               Retry
             </Button>
           </div>
@@ -224,7 +263,7 @@ export function InstagramFeed({ username }: { username: string }) {
         </div>
         {/* Posts Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-0.5 bg-gray-200 dark:bg-gray-700">
-          {profile.posts.map((post) => (
+          {visiblePosts.map((post) => (
             <a 
               key={post.id} 
               href={post.url}
@@ -257,21 +296,10 @@ export function InstagramFeed({ username }: { username: string }) {
         </div>
         {/* Load More Button - Always show it */}
         <div className="p-6 flex justify-center">
-          <Button 
-            onClick={handleLoadMore} 
-            disabled={loadingMore} 
-            variant="outline" 
-            className="min-w-[120px]"
-          >
-            {loadingMore ? (
-              <div className="flex items-center gap-2">
-                <div className="h-4 w-4 border-2 border-gray-600 border-t-transparent rounded-full animate-spin" />
-                Loading
-              </div>
-            ) : (
-              loadMoreClickCount === 1 ? 'See All Posts' : 'Load More'
-            )}
-          </Button>
+        <Button onClick={handleLoadMore} variant="outline" className="min-w-[120px]">
+  {loadMoreClicked ? 'See All on Instagram' : 'Load More'}
+</Button>
+
         </div>
       </div>
     </div>
