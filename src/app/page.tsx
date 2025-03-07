@@ -10,6 +10,7 @@ import GoogleRating from "@/components/GoogleRating";
 import Hero from "@/components/Hero";
 import { InstagramFeed } from "@/components/InstagramFeed";
 import InstagramFeedFinal from "@/components/InstagramFeedFinal";
+import ReviewsPage from "@/components/reviews";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import Video from "@/components/Video";
@@ -218,6 +219,7 @@ const reviewCount = 278;
 
        {/* <InstagramFeedFinal />  */}
       <Faqs />
+      <ReviewsPage />
       
       {/* <Pricing /> */}
       {/* <Blog /> */}
