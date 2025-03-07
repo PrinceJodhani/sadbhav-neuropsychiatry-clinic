@@ -460,12 +460,9 @@
 
 
 
-
-
-
 import { NextResponse } from 'next/server';
-import chromium from 'chrome-aws-lambda';
-import type { Browser } from 'puppeteer';
+import chromium from '@sparticuz/chromium';
+import type { Browser } from 'puppeteer-core';
 
 interface InstagramPost {
   id: string;
@@ -511,7 +508,7 @@ export async function GET(request: Request) {
 
   try {
     const now = Date.now();
-    // Use cached data if available and valid.
+    // Return cached data if available and not expired.
     if (
       cachedData &&
       cachedData.profile.username === username &&
@@ -531,11 +528,12 @@ export async function GET(request: Request) {
       return NextResponse.json({
         ...cachedData.profile,
         posts: paginatedPosts,
-        hasMore: (page + 1) * postsPerPage < cachedData.profile.posts.length,
+        hasMore:
+          (page + 1) * postsPerPage < cachedData.profile.posts.length,
       });
     }
 
-    // No valid cache; scrape Instagram.
+    // No valid cache; scrape the Instagram profile.
     const profileData = await scrapeInstagramProfile(username);
     cachedData = {
       profile: profileData,
@@ -566,20 +564,22 @@ async function scrapeInstagramProfile(
 ): Promise<InstagramProfile> {
   let browser: Browser;
 
-  // Use chrome-aws-lambda in production (Vercel/AWS Lambda)
+  // In production (e.g. Vercel or AWS Lambda), use @sparticuz/chromium with puppeteer-core.
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-    const executablePath = await chromium.executablePath;
-    browser = await (await import('puppeteer-core')).launch({
-      args: chromium.args,
-      executablePath: executablePath!,
-      headless: chromium.headless,
-    }) as unknown as Browser;
-  } else {
-    // Use full puppeteer in development.
-    const puppeteer = await import('puppeteer');
+    const executablePath = await chromium.executablePath();
+    const puppeteer = await import('puppeteer-core');
     browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: executablePath,
       headless: true,
     });
+  } else {
+    // In development, use full puppeteer.
+const puppeteer = (await import('puppeteer')).default;
+// @ts-ignore
+browser = await puppeteer.launch({
+  headless: true,
+});
   }
 
   try {
@@ -589,13 +589,13 @@ async function scrapeInstagramProfile(
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
     );
 
-    // Navigate to the Instagram profile page.
+    // Navigate to the Instagram profile.
     await page.goto(`https://www.instagram.com/${username}/`, {
       waitUntil: 'networkidle2',
       timeout: 60000,
     });
 
-    // Dismiss potential login popup.
+    // Dismiss any potential login popup.
     try {
       const loginPopup = await page.$('div[role="dialog"]');
       if (loginPopup) {
@@ -611,15 +611,21 @@ async function scrapeInstagramProfile(
       console.log('No login popup found or unable to dismiss:', error);
     }
 
-    // Wait for images to load.
+    // Wait for page images to load.
     await page.waitForSelector('img', { timeout: 30000 });
 
     // Scroll a few times to load more posts.
-    let previousHeight = await page.evaluate(() => document.body.scrollHeight);
+    let previousHeight = await page.evaluate(
+      () => document.body.scrollHeight
+    );
     for (let i = 0; i < 3; i++) {
-      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await page.evaluate(() =>
+        window.scrollTo(0, document.body.scrollHeight)
+      );
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      const newHeight = await page.evaluate(() => document.body.scrollHeight);
+      const newHeight = await page.evaluate(
+        () => document.body.scrollHeight
+      );
       if (newHeight === previousHeight) break;
       previousHeight = newHeight;
     }
@@ -650,22 +656,29 @@ async function scrapeInstagramProfile(
 
       // Get full name.
       const fullNameElement = document.querySelector('h1');
-      const fullName = fullNameElement ? fullNameElement.textContent || username : username;
+      const fullName =
+        fullNameElement?.textContent?.trim() || username;
 
-      // Extract counts (posts, followers, following).
+      // Extract counts for posts, followers, and following.
       const countEls = document.querySelectorAll('ul li span');
       let postsCount = 0,
         followersCount = 0,
         followingCount = 0;
       if (countEls.length >= 3) {
         postsCount = parseCount(
-          countEls[0].getAttribute('title') || countEls[0].textContent || ''
+          countEls[0].getAttribute('title') ||
+            countEls[0].textContent ||
+            ''
         );
         followersCount = parseCount(
-          countEls[1].getAttribute('title') || countEls[1].textContent || ''
+          countEls[1].getAttribute('title') ||
+            countEls[1].textContent ||
+            ''
         );
         followingCount = parseCount(
-          countEls[2].getAttribute('title') || countEls[2].textContent || ''
+          countEls[2].getAttribute('title') ||
+            countEls[2].textContent ||
+            ''
         );
       }
 
@@ -681,7 +694,9 @@ async function scrapeInstagramProfile(
           const url = el.getAttribute('href') || '';
           return {
             id: `post-${index}`,
-            url: url.startsWith('http') ? url : `https://instagram.com${url}`,
+            url: url.startsWith('http')
+              ? url
+              : `https://instagram.com${url}`,
             thumbnailUrl: img ? img.src : '',
             caption: img ? img.alt : '',
             likes: 0,
