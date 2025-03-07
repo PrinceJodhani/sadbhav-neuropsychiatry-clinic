@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { Heart, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -43,6 +43,7 @@ export function InstagramFeed({ username }: { username: string }) {
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreClickCount, setLoadMoreClickCount] = useState(0);
   const postsPerPage = 6;
 
   const fetchInstagramData = async (page = 0) => {
@@ -61,17 +62,19 @@ export function InstagramFeed({ username }: { username: string }) {
       if (page === 0) {
         setFullProfile(data);
         const slicedPosts = data.posts.slice(0, postsPerPage);
-        setProfile({ ...data, posts: slicedPosts, hasMore: data.posts.length > postsPerPage });
+        // Always show hasMore as true for the first page, even if there aren't enough posts
+        setProfile({ ...data, posts: slicedPosts, hasMore: true });
       } else {
         if (!fullProfile) return;
         const nextPosts = fullProfile.posts.slice(page * postsPerPage, (page + 1) * postsPerPage);
         setProfile(prev => {
-          if (!prev) return { ...fullProfile, posts: nextPosts, hasMore: fullProfile.posts.length > (page + 1) * postsPerPage };
+          if (!prev) return { ...fullProfile, posts: nextPosts, hasMore: true };
           const updatedPosts = [...prev.posts, ...nextPosts];
+          // Always show hasMore as true for the second page
           return {
             ...prev,
             posts: updatedPosts,
-            hasMore: fullProfile.posts.length > updatedPosts.length
+            hasMore: true
           };
         });
       }
@@ -89,6 +92,17 @@ export function InstagramFeed({ username }: { username: string }) {
   }, [username]);
 
   const handleLoadMore = () => {
+    // Increment the click count
+    const newClickCount = loadMoreClickCount + 1;
+    setLoadMoreClickCount(newClickCount);
+    
+    // If this is the second click, redirect to Instagram profile
+    if (newClickCount >= 2) {
+      window.open(`https://www.instagram.com/${username}`, '_blank');
+      return;
+    }
+    
+    // Otherwise, load more posts
     const nextPage = currentPage + 1;
     setCurrentPage(nextPage);
     fetchInstagramData(nextPage);
@@ -241,21 +255,24 @@ export function InstagramFeed({ username }: { username: string }) {
             </a>
           ))}
         </div>
-        {/* Load More Button */}
-        {profile.hasMore && (
-          <div className="p-6 flex justify-center">
-            <Button onClick={handleLoadMore} disabled={loadingMore} variant="outline" className="min-w-[120px]">
-              {loadingMore ? (
-                <div className="flex items-center gap-2">
-                  <div className="h-4 w-4 border-2 border-gray-600 border-t-transparent rounded-full animate-spin" />
-                  Loading
-                </div>
-              ) : (
-                'Load More'
-              )}
-            </Button>
-          </div>
-        )}
+        {/* Load More Button - Always show it */}
+        <div className="p-6 flex justify-center">
+          <Button 
+            onClick={handleLoadMore} 
+            disabled={loadingMore} 
+            variant="outline" 
+            className="min-w-[120px]"
+          >
+            {loadingMore ? (
+              <div className="flex items-center gap-2">
+                <div className="h-4 w-4 border-2 border-gray-600 border-t-transparent rounded-full animate-spin" />
+                Loading
+              </div>
+            ) : (
+              loadMoreClickCount === 1 ? 'See All Posts' : 'Load More'
+            )}
+          </Button>
+        </div>
       </div>
     </div>
   );

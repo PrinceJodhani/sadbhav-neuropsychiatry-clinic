@@ -47,19 +47,7 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    serverExternalPackages: ["puppeteer"],
-  },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      config.externals = config.externals || [];
-      config.externals.push({
-        'puppeteer-core': 'commonjs puppeteer-core',
-        'chrome-aws-lambda': 'commonjs chrome-aws-lambda'
-      });
-    }
-    return config;
-  },
+ 
 };
 
 module.exports = nextConfig;
