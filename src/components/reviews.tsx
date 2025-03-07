@@ -1,4 +1,3 @@
-'use client'
 import { useEffect, useState } from "react";
 import { Star, ChevronDown, MapPin, ThumbsUp } from "lucide-react";
 
@@ -108,7 +107,7 @@ export default function ReviewsPage() {
         {data.reviews.slice(0, visibleReviews).map((review) => (
           <div
             key={review.review_id}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 transition-all"
+            className="bg-white dark:bg-gray-800 rounded-lg shadow p-4 transition-all hover:shadow-md"
           >
             <div className="flex items-start gap-3">
               <img
@@ -129,7 +128,7 @@ export default function ReviewsPage() {
                 <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
                   {review.date}
                 </p>
-                <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3">
+                <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
                   {review.snippet}
                 </p>
                 <div className="mt-3 flex items-center justify-between text-xs">
@@ -143,7 +142,7 @@ export default function ReviewsPage() {
                     rel="noopener noreferrer"
                     className="text-blue-600 dark:text-blue-400 hover:underline"
                   >
-                    Read more
+                    View on Google
                   </a>
                 </div>
               </div>
