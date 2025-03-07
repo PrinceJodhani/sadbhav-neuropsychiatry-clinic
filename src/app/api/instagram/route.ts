@@ -463,9 +463,9 @@
 
 
 
-
 import { NextResponse } from 'next/server';
-import { chromium } from 'playwright';
+import chromium from 'chrome-aws-lambda';
+import type { Browser } from 'puppeteer';
 
 interface InstagramPost {
   id: string;
@@ -487,84 +487,226 @@ interface InstagramProfile {
   posts: InstagramPost[];
 }
 
+interface CachedData {
+  profile: InstagramProfile;
+  servedPages: Set<number>;
+  timestamp: number;
+}
+
+let cachedData: CachedData | null = null;
+const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const username = searchParams.get('username');
+  const page = parseInt(searchParams.get('page') || '0');
+  const postsPerPage = parseInt(searchParams.get('limit') || '6');
+
+  if (!username) {
+    return NextResponse.json(
+      { error: 'Username parameter is required' },
+      { status: 400 }
+    );
+  }
+
   try {
-    const { searchParams } = new URL(request.url);
-    const username = searchParams.get('username');
-    if (!username) {
-      return NextResponse.json(
-        { error: 'Username parameter is required' },
-        { status: 400 }
+    const now = Date.now();
+    // Use cached data if available and valid.
+    if (
+      cachedData &&
+      cachedData.profile.username === username &&
+      now - cachedData.timestamp < CACHE_TTL
+    ) {
+      if (cachedData.servedPages.has(page)) {
+        return NextResponse.json(
+          { error: 'Page already served' },
+          { status: 400 }
+        );
+      }
+      cachedData.servedPages.add(page);
+      const paginatedPosts = cachedData.profile.posts.slice(
+        page * postsPerPage,
+        (page + 1) * postsPerPage
       );
+      return NextResponse.json({
+        ...cachedData.profile,
+        posts: paginatedPosts,
+        hasMore: (page + 1) * postsPerPage < cachedData.profile.posts.length,
+      });
     }
 
-    // Launch Playwright's Chromium instance with no sandbox (helpful in serverless)
-    const browser = await chromium.launch({
-      args: ['--no-sandbox']
-    });
-    const page = await browser.newPage();
-
-    // Navigate to the Instagram profile page
-    await page.goto(`https://www.instagram.com/${username}/`, {
-      waitUntil: 'networkidle'
-    });
-
-    // Wait for posts to load. This selector is based on Instagram's structure.
-    await page.waitForSelector('article a[href*="/p/"]', { timeout: 10000 });
-
-    // Extract posts data from the rendered page
-    const posts: InstagramPost[] = await page.evaluate(() => {
-      const postElements = document.querySelectorAll('article a[href*="/p/"]');
-      const postsArray: InstagramPost[] = [];
-      postElements.forEach((el) => {
-        const anchor = el as HTMLAnchorElement;
-        const href = anchor.href;
-        const idMatch = href.match(/\/p\/([^\/]+)\//);
-        const id = idMatch ? idMatch[1] : '';
-        const img = anchor.querySelector('img');
-        const thumbnailUrl = img ? img.src : '';
-        const caption = img ? img.alt : '';
-        // Note: likes and comments are not readily available in the static rendered content.
-        postsArray.push({
-          id,
-          url: href,
-          thumbnailUrl,
-          caption,
-          likes: 0,
-          comments: 0
-        });
-      });
-      return postsArray;
-    });
-
-    // Extract basic profile info.
-    // Use meta tag for profile picture.
-    const profilePicUrl =
-      (await page.getAttribute('meta[property="og:image"]', 'content')) || '';
-    // Use the page title to heuristically extract full name.
-    const title = await page.title();
-    const fullName = title.split('•')[0].trim();
-
-    await browser.close();
-
-    // Build profile object (bio, followers, and following are omitted here)
-    const profile: InstagramProfile = {
-      username,
-      fullName,
-      profilePicUrl,
-      bio: '', // You can add extra logic to extract the bio if needed.
-      postsCount: posts.length,
-      followersCount: 0, // Not extracted in this example.
-      followingCount: 0, // Not extracted in this example.
-      posts
+    // No valid cache; scrape Instagram.
+    const profileData = await scrapeInstagramProfile(username);
+    cachedData = {
+      profile: profileData,
+      servedPages: new Set([page]),
+      timestamp: now,
     };
 
-    return NextResponse.json(profile);
+    const paginatedPosts = profileData.posts.slice(
+      page * postsPerPage,
+      (page + 1) * postsPerPage
+    );
+    return NextResponse.json({
+      ...profileData,
+      posts: paginatedPosts,
+      hasMore: (page + 1) * postsPerPage < profileData.posts.length,
+    });
   } catch (error) {
-    console.error('Error scraping Instagram with Playwright:', error);
+    console.error('Error loading Instagram profile:', error);
     return NextResponse.json(
-      { error: 'Failed to scrape Instagram data' },
+      { error: 'Failed to load Instagram profile' },
       { status: 500 }
     );
+  }
+}
+
+async function scrapeInstagramProfile(
+  username: string
+): Promise<InstagramProfile> {
+  let browser: Browser;
+
+  // Use chrome-aws-lambda in production (Vercel/AWS Lambda)
+  if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+    const executablePath = await chromium.executablePath;
+    browser = await (await import('puppeteer-core')).launch({
+      args: chromium.args,
+      executablePath: executablePath!,
+      headless: chromium.headless,
+    }) as unknown as Browser;
+  } else {
+    // Use full puppeteer in development.
+    const puppeteer = await import('puppeteer');
+    browser = await puppeteer.launch({
+      headless: true,
+    });
+  }
+
+  try {
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.setUserAgent(
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+    );
+
+    // Navigate to the Instagram profile page.
+    await page.goto(`https://www.instagram.com/${username}/`, {
+      waitUntil: 'networkidle2',
+      timeout: 60000,
+    });
+
+    // Dismiss potential login popup.
+    try {
+      const loginPopup = await page.$('div[role="dialog"]');
+      if (loginPopup) {
+        const closeButton = await loginPopup.$('button');
+        if (closeButton) {
+          await closeButton.click();
+        } else {
+          await page.mouse.click(10, 10);
+        }
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    } catch (error) {
+      console.log('No login popup found or unable to dismiss:', error);
+    }
+
+    // Wait for images to load.
+    await page.waitForSelector('img', { timeout: 30000 });
+
+    // Scroll a few times to load more posts.
+    let previousHeight = await page.evaluate(() => document.body.scrollHeight);
+    for (let i = 0; i < 3; i++) {
+      await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const newHeight = await page.evaluate(() => document.body.scrollHeight);
+      if (newHeight === previousHeight) break;
+      previousHeight = newHeight;
+    }
+
+    // Extract profile and posts data.
+    const profileData: InstagramProfile = await page.evaluate(() => {
+      const parseCount = (countStr: string): number => {
+        if (!countStr) return 0;
+        countStr = countStr.replace(',', '').trim();
+        if (countStr.includes('K'))
+          return parseFloat(countStr.replace('K', '')) * 1000;
+        if (countStr.includes('M'))
+          return parseFloat(countStr.replace('M', '')) * 1000000;
+        return parseInt(countStr);
+      };
+
+      // Get profile picture.
+      const profilePicElement = document.querySelector(
+        'img[alt*="profile picture"]'
+      ) as HTMLImageElement;
+      const profilePicUrl = profilePicElement ? profilePicElement.src : '';
+
+      // Get username from meta tag.
+      const metaUsername = document.querySelector(
+        'meta[property="og:username"]'
+      ) as HTMLMetaElement;
+      const username = metaUsername ? metaUsername.content : '';
+
+      // Get full name.
+      const fullNameElement = document.querySelector('h1');
+      const fullName = fullNameElement ? fullNameElement.textContent || username : username;
+
+      // Extract counts (posts, followers, following).
+      const countEls = document.querySelectorAll('ul li span');
+      let postsCount = 0,
+        followersCount = 0,
+        followingCount = 0;
+      if (countEls.length >= 3) {
+        postsCount = parseCount(
+          countEls[0].getAttribute('title') || countEls[0].textContent || ''
+        );
+        followersCount = parseCount(
+          countEls[1].getAttribute('title') || countEls[1].textContent || ''
+        );
+        followingCount = parseCount(
+          countEls[2].getAttribute('title') || countEls[2].textContent || ''
+        );
+      }
+
+      // Get bio.
+      const bioElement = document.querySelector('div.-vDIg span');
+      const bio = bioElement ? (bioElement as HTMLElement).innerText : '';
+
+      // Get posts.
+      const postElements = document.querySelectorAll('article a');
+      const posts = Array.from(postElements)
+        .map((el, index) => {
+          const img = el.querySelector('img') as HTMLImageElement;
+          const url = el.getAttribute('href') || '';
+          return {
+            id: `post-${index}`,
+            url: url.startsWith('http') ? url : `https://instagram.com${url}`,
+            thumbnailUrl: img ? img.src : '',
+            caption: img ? img.alt : '',
+            likes: 0,
+            comments: 0,
+          };
+        })
+        .filter((post) => post.thumbnailUrl);
+
+      return {
+        username,
+        fullName,
+        profilePicUrl,
+        bio,
+        postsCount,
+        followersCount,
+        followingCount,
+        posts,
+      };
+    });
+
+    return profileData;
+  } catch (error) {
+    console.error('Error scraping Instagram profile:', error);
+    throw new Error('Failed to load Instagram profile');
+  } finally {
+    await browser.close();
   }
 }
