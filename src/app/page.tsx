@@ -205,7 +205,7 @@ const reviewCount = 278;
       {/* <Brands /> */}
       <AboutSectionOne />
       {/* <AboutSectionTwo /> */}
-      <Testimonials />
+      {/* <Testimonials /> */}
       <FindUs />
       <BlogSection />
        {/* <InstagramFeed username={'sadbhav_clinic'} /> */}

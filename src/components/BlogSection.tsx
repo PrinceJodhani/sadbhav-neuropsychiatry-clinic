@@ -142,6 +142,7 @@ const BlogSection = () => {
               onScroll={handleScroll}
             >
               {blogs.map((post, index) => (
+                <a href={`https://aarogyaminds.com/blogs/${post.slug}`} key={post.id || index} target="_blank" rel="noopener noreferrer">
                 <motion.div
                   key={post.id || index}
                   variants={itemVariants}
@@ -151,7 +152,7 @@ const BlogSection = () => {
                     <div className="absolute inset-0 bg-gray-900/20 group-hover:bg-gray-900/10 transition-colors duration-300 z-10"></div>
                     <div className="absolute top-3 left-3 z-20">
                       <span className="px-3 py-1 text-xs font-medium bg-primary/90 text-white rounded-full">
-                        {post.category}
+                        {post.tags.split(",")[0]}
                       </span>
                     </div>
                     <Image
@@ -175,6 +176,7 @@ const BlogSection = () => {
                     </Link>
                   </div>
                 </motion.div>
+                </a>
               ))}
             </div>
           )}
