@@ -14,6 +14,8 @@ import ReviewsPage from "@/components/reviews";
 import Stats from "@/components/Stats";
 import Testimonials from "@/components/Testimonials";
 import Video from "@/components/Video";
+import YoutubeWidget from "@/components/YoutubeWidget";
+import YoutubeEmbed from "@/components/YoutubeWidget";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -197,7 +199,7 @@ const reviewCount = 278;
 </a>
       <ScrollUp />
       <Hero />
-     
+    
       <GoogleRating rating={rating} reviewCount={reviewCount} /> {/* Add GoogleRating here */}
       <Stats />
       <Features />
@@ -220,6 +222,8 @@ const reviewCount = 278;
        {/* <InstagramFeedFinal />  */}
       <Faqs />
       <ReviewsPage />
+      <br></br>
+      <YoutubeWidget />
       
       {/* <Pricing /> */}
       {/* <Blog /> */}
