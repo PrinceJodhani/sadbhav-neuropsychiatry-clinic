@@ -158,7 +158,7 @@ export const metadata: Metadata = {
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": 4.9,
-          "reviewCount": 278
+          "reviewCount": 282
         }
       }
     ])
@@ -174,7 +174,7 @@ export default async function Home() {
 
 
 const rating = 4.9;
-const reviewCount = 278;
+const reviewCount = 282;
 
   return (
     <>
