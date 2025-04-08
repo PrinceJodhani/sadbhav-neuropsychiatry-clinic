@@ -11,6 +11,11 @@ const nextConfig = {
       "instagram.com",
       "instagram.famd1-2.fna.fbcdn.net",
       'instagram.fcdn.net',
+      "lh3.googleusercontent.com",
+      'https://lh3.googleusercontent.com',
+      "googleusercontent.com",
+      
+  
     ],
     remotePatterns: [
       {

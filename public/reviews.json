@@ -1,14 +1,14 @@
 {
   "search_metadata": {
-    "id": "67e2a1c8537c9c4fe1bf1d78",
+    "id": "67f4d971dfa84cdcb280a536",
     "status": "Success",
-    "json_endpoint": "https://serpapi.com/searches/2e68211012529c2c/67e2a1c8537c9c4fe1bf1d78.json",
-    "created_at": "2025-03-25 12:30:00 UTC",
-    "processed_at": "2025-03-25 12:30:00 UTC",
+    "json_endpoint": "https://serpapi.com/searches/2e68211012529c2c/67f4d971dfa84cdcb280a536.json",
+    "created_at": "2025-04-08 08:08:17 UTC",
+    "processed_at": "2025-04-08 08:08:17 UTC",
     "google_maps_reviews_url": "https://www.google.com/maps/place/data=!4m7!3m6!1s0x3be04dc44dfe42f3:0x623c23315a63d369!5m2!4m1!1i2!9m1!1b1?hl=en&gl=",
-    "raw_html_file": "https://serpapi.com/searches/2e68211012529c2c/67e2a1c8537c9c4fe1bf1d78.html",
-    "prettify_html_file": "https://serpapi.com/searches/2e68211012529c2c/67e2a1c8537c9c4fe1bf1d78.prettify",
-    "total_time_taken": 0.97
+    "raw_html_file": "https://serpapi.com/searches/2e68211012529c2c/67f4d971dfa84cdcb280a536.html",
+    "prettify_html_file": "https://serpapi.com/searches/2e68211012529c2c/67f4d971dfa84cdcb280a536.prettify",
+    "total_time_taken": 1.33
   },
   "search_parameters": {
     "engine": "google_maps_reviews",
@@ -20,7 +20,7 @@
     "title": "Dr. Jash Ajmera | Psychiatrist and Psychotherapist in Surat | Sadbhav Neuropsychiatry Clinic",
     "address": "209 vesu point, Vesu Main Road, above HDFC Bank, opp. vijya laxmi hall, Surat, Gujarat 395007, India",
     "rating": 4.9,
-    "reviews": 282,
+    "reviews": 288,
     "type": "Psychiatrist"
   },
   "topics": [
@@ -35,24 +35,19 @@
       "id": "/m/02p2635"
     },
     {
-      "keyword": "mental health",
-      "mentions": 11,
-      "id": "/m/03x69g"
-    },
-    {
       "keyword": "empathetic",
-      "mentions": 10,
+      "mentions": 11,
       "id": "/m/01s169"
     },
     {
       "keyword": "skills",
-      "mentions": 9,
+      "mentions": 10,
       "id": "/m/01zsxh"
     },
     {
-      "keyword": "understanding",
+      "keyword": "depression",
       "mentions": 8,
-      "id": "/m/01fndy"
+      "id": "/m/03f_cb"
     },
     {
       "keyword": "disease",
@@ -60,14 +55,19 @@
       "id": "/m/027x3"
     },
     {
-      "keyword": "depression",
-      "mentions": 7,
-      "id": "/m/03f_cb"
-    },
-    {
       "keyword": "behaviour",
       "mentions": 6,
       "id": "/m/01jbm"
+    },
+    {
+      "keyword": "knowledge",
+      "mentions": 6,
+      "id": "/m/01k8wb"
+    },
+    {
+      "keyword": "my mother",
+      "mentions": 5,
+      "id": "/m/0lbxz"
     },
     {
       "keyword": "cooperative",
@@ -76,6 +76,52 @@
     }
   ],
   "reviews": [
+    {
+      "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUR3X3V1eV9RRRAB!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgMDw_uuy_QE%7CCgsIkt2OvwYQwP-eUA%7C?hl=en-US",
+      "rating": 5,
+      "date": "a week ago",
+      "iso_date": "2025-03-26T07:36:50Z",
+      "iso_date_of_last_edit": "2025-03-26T07:36:50Z",
+      "source": "Google",
+      "review_id": "ChdDSUhNMG9nS0VJQ0FnTUR3X3V1eV9RRRAB",
+      "user": {
+        "name": "pratik brahmbhatt",
+        "link": "https://www.google.com/maps/contrib/117621208384467322597?hl=en-US",
+        "contributor_id": "117621208384467322597",
+        "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUv1F-hiRrLvzofvhPwqyq4Hsdz6psdALT1u2aDqTwgPjAsqqCc=s120-c-rp-mo-br100",
+        "local_guide": true,
+        "reviews": 3,
+        "photos": 0
+      },
+      "snippet": "“A heartfelt thank you to Dr. Jash Ajmera for providing the best treatment and exceptional care for my mother. With your expertise and support, she is overcoming deep depression and anxiety. Truly grateful for your dedication and excellent service!”",
+      "extracted_snippet": {
+        "original": "“A heartfelt thank you to Dr. Jash Ajmera for providing the best treatment and exceptional care for my mother. With your expertise and support, she is overcoming deep depression and anxiety. Truly grateful for your dedication and excellent service!”"
+      },
+      "likes": 0
+    },
+    {
+      "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUR3X3JhUTVnRRAB!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgMDw_raQ5gE%7CCgwI0sCOvwYQyIvGvQM%7C?hl=en-US",
+      "rating": 5,
+      "date": "a week ago",
+      "iso_date": "2025-03-26T06:32:48Z",
+      "iso_date_of_last_edit": "2025-03-26T06:36:02Z",
+      "source": "Google",
+      "review_id": "ChdDSUhNMG9nS0VJQ0FnTUR3X3JhUTVnRRAB",
+      "user": {
+        "name": "Ruchi Arora",
+        "link": "https://www.google.com/maps/contrib/117546879492387005385?hl=en-US",
+        "contributor_id": "117546879492387005385",
+        "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocL81laWz8xiCo2mypqDuoi04yVjJHuz4ceVyov4g67hKpCkew=s120-c-rp-mo-ba2-br100",
+        "local_guide": true,
+        "reviews": 16,
+        "photos": 0
+      },
+      "snippet": "I have been seeing Dr Jash for more than 6 months , and the experience has truly been transformative. His compassionate approach, active listening skills, and tailored strategies have helped me navigate challenges with greater clarity and confidence. I highly recommend Dr Jash to anyone seeking professional and empathetic mental health support.",
+      "extracted_snippet": {
+        "original": "I have been seeing Dr Jash for more than 6 months , and the experience has truly been transformative. His compassionate approach, active listening skills, and tailored strategies have helped me navigate challenges with greater clarity and confidence. I highly recommend Dr Jash to anyone seeking professional and empathetic mental health support."
+      },
+      "likes": 0
+    },
     {
       "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURfcWFEV21nRRAB!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgID_qaDWmgE%7CCgsIxI_SvAYQ4IbcaA%7C?hl=en-US",
       "rating": 5,
@@ -119,6 +165,28 @@
       "snippet": "Dr. Jash Ajmera is young and energetic Doctor, his behaviour is polite enough. Staff is also cooperative. I am consulting for my friend and he is recovering better. Recommended for others.",
       "extracted_snippet": {
         "original": "Dr. Jash Ajmera is young and energetic Doctor, his behaviour is polite enough. Staff is also cooperative. I am consulting for my friend and he is recovering better. Recommended for others."
+      },
+      "likes": 0
+    },
+    {
+      "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUR3OWVma0JnEAE!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgMDw9efkBg%7CCgwIg4uVvwYQkJHSmgM%7C?hl=en-US",
+      "rating": 5,
+      "date": "a week ago",
+      "iso_date": "2025-03-27T12:33:07Z",
+      "iso_date_of_last_edit": "2025-03-27T12:33:07Z",
+      "source": "Google",
+      "review_id": "ChZDSUhNMG9nS0VJQ0FnTUR3OWVma0JnEAE",
+      "user": {
+        "name": "hardik patel",
+        "link": "https://www.google.com/maps/contrib/103804357245091851595?hl=en-US",
+        "contributor_id": "103804357245091851595",
+        "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocJqqCQm00Zpg85ilQ7Zrh1B8oRUu9-jnDMFGrRZFCPwGPoKVg=s120-c-rp-mo-br100",
+        "reviews": 1,
+        "photos": 0
+      },
+      "snippet": "Dr. Jash is outstanding and provides exceptional care. I highly recommend him to anyone seeking assistance with psychiatric disorders!!",
+      "extracted_snippet": {
+        "original": "Dr. Jash is outstanding and provides exceptional care. I highly recommend him to anyone seeking assistance with psychiatric disorders!!"
       },
       "likes": 0
     },
@@ -170,7 +238,7 @@
     {
       "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUN3d3JYMG5BRRAB!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgMCwwrX0nAE%7CCgwIq87gvgYQoNqOzQM%7C?hl=en-US",
       "rating": 5,
-      "date": "a week ago",
+      "date": "3 weeks ago",
       "iso_date": "2025-03-17T13:44:11Z",
       "iso_date_of_last_edit": "2025-03-17T13:44:11Z",
       "source": "Google",
@@ -186,73 +254,6 @@
       "snippet": "The hospital is very nice and the staff here is very nice in behaviour my health is getting good day by day after.I came to this hospital.",
       "extracted_snippet": {
         "original": "The hospital is very nice and the staff here is very nice in behaviour my health is getting good day by day after.I came to this hospital."
-      },
-      "likes": 0
-    },
-    {
-      "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChRDSUhNMG9nS0VJQ0FnSUM3a3I1YhAB!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgIC7kr5b%7CCgsIgb3xtQYQ6NSKfw%7C?hl=en-US",
-      "rating": 5,
-      "date": "7 months ago",
-      "iso_date": "2024-08-14T07:36:33Z",
-      "iso_date_of_last_edit": "2024-08-14T07:36:33Z",
-      "source": "Google",
-      "review_id": "ChRDSUhNMG9nS0VJQ0FnSUM3a3I1YhAB",
-      "user": {
-        "name": "Hasmukhbhai Khalasi",
-        "link": "https://www.google.com/maps/contrib/117528897953507336079?hl=en-US",
-        "contributor_id": "117528897953507336079",
-        "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocIbSGnlR13jdNqniLFiYxbHEYFDE0V2OWiqhp_RaKrtVvec4A=s120-c-rp-mo-br100",
-        "reviews": 4,
-        "photos": 0
-      },
-      "snippet": "Dear Dr. Jash Ajamera,\n\nI wanted to express my heartfelt appreciation for the exceptional treatment andsupport you have provided regarding my wife's treatment. Your insights and dedication have been invaluable in guiding us through this journey. Your expertise and compassionate approach have not only brought clarity but also instilled confidence in the treatment plan. We are deeply grateful for your commitment to her well-being and for going above and beyond in your care.Thank you for making such a positive difference in our lives.\n\nWarm regards,\nHasmukh Khalasi",
-      "extracted_snippet": {
-        "original": "Dear Dr. Jash Ajamera,\n\nI wanted to express my heartfelt appreciation for the exceptional treatment andsupport you have provided regarding my wife's treatment. Your insights and dedication have been invaluable in guiding us through this journey. Your expertise and compassionate approach have not only brought clarity but also instilled confidence in the treatment plan. We are deeply grateful for your commitment to her well-being and for going above and beyond in your care.Thank you for making such a positive difference in our lives.\n\nWarm regards,\nHasmukh Khalasi"
-      },
-      "likes": 0
-    },
-    {
-      "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSURfcXF2S2VnEAE!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgID_qqvKeg%7CCgwIkvPIvAYQ2M6axQE%7C?hl=en-US",
-      "rating": 5,
-      "date": "2 months ago",
-      "iso_date": "2025-01-23T10:52:14Z",
-      "iso_date_of_last_edit": "2025-01-23T12:44:02Z",
-      "source": "Google",
-      "review_id": "ChZDSUhNMG9nS0VJQ0FnSURfcXF2S2VnEAE",
-      "user": {
-        "name": "Dr.Chintan Bhatt",
-        "link": "https://www.google.com/maps/contrib/116569676865605650962?hl=en-US",
-        "contributor_id": "116569676865605650962",
-        "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjWXa_8wsFQIb3cuCw8dZcT3wfC3Wv9V_gThqb7oBYcPK941qPpa=s120-c-rp-mo-ba3-br100",
-        "local_guide": true,
-        "reviews": 33,
-        "photos": 7
-      },
-      "snippet": "Wonderful doc with good knowledge.We discuss more about patients,diagnosis and approch to patients for betterment o",
-      "extracted_snippet": {
-        "original": "Wonderful doc with good knowledge.We discuss more about patients,diagnosis and approch to patients for betterment o"
-      },
-      "likes": 0
-    },
-    {
-      "link": "https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnSUNuLTZPY0RREAE!2m1!1s0x0:0x623c23315a63d369!3m1!1s2@1:CIHM0ogKEICAgICn-6OcDQ%7CCgwI5sfqtwYQuJn5jAE%7C?hl=en-US",
-      "rating": 5,
-      "date": "5 months ago",
-      "iso_date": "2024-09-30T13:13:10Z",
-      "iso_date_of_last_edit": "2024-09-30T13:13:10Z",
-      "source": "Google",
-      "review_id": "ChZDSUhNMG9nS0VJQ0FnSUNuLTZPY0RREAE",
-      "user": {
-        "name": "Jeet Desai",
-        "link": "https://www.google.com/maps/contrib/109517537316868610369?hl=en-US",
-        "contributor_id": "109517537316868610369",
-        "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocJMxNQjN96saKp83a2LfugrZtFiLbUnnzUPKJoEuTd4wjssog=s120-c-rp-mo-br100",
-        "reviews": 1,
-        "photos": 0
-      },
-      "snippet": "The counselling given by Dr Jash Ajmera is excellent, he understands every issue and addresses them in a very good manner. I feel much better after consulting him.",
-      "extracted_snippet": {
-        "original": "The counselling given by Dr Jash Ajmera is excellent, he understands every issue and addresses them in a very good manner. I feel much better after consulting him."
       },
       "likes": 0
     }

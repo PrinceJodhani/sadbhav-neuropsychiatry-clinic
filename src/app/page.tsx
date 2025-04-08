@@ -19,7 +19,7 @@ import YoutubeEmbed from "@/components/YoutubeWidget";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Best Psychiatrist in Surat, Gujarat | Dr. Jash Ajmera | Sadbhav Neuropsychiatry Clinic",
+  title: "Best Psychiatrist in Surat - Dr. Jash Ajmera | Sadbhav Neuropsychiatry Clinic",
   description: "Dr. Jash Ajmera is a leading psychiatrist in Surat, Gujarat providing expert mental health care at Sadbhav Neuropsychiatry Clinic. Book an appointment with the best psychiatrist in Surat today.",
   keywords: "psychiatrist in surat, best psychiatrist in surat, psychiatrist in gujarat, dr jash ajmera, sadbhav neuropsychiatry clinic, top psychiatrist in surat, mental health specialist surat, psychiatrist near me, depression treatment surat, anxiety treatment gujarat",
   
@@ -112,7 +112,8 @@ export const metadata: Metadata = {
       {
         "@context": "https://schema.org",
         "@type": "MedicalBusiness",
-        "name": "Sadbhav Neuropsychiatry Clinic",
+        "name": "Best psychiatrist in Surat | Dr. Jash Ajmera | Sadbhav Neuropsychiatry Clinic",
+        "alternateName": "Sadbhav Neuropsychiatry Clinic",
         "url": "https://psychiatristinsurat.in",
         "logo": "https://psychiatristinsurat.in/images/sadbhav/favicon_io/apple-touch-icon.png",  
         "image": "https://psychiatristinsurat.in/images/sadbhav/team-itemm.jpg", 
@@ -174,7 +175,7 @@ export default async function Home() {
 
 
 const rating = 4.9;
-const reviewCount = 282;
+const reviewCount = 288;
 
   return (
     <>
