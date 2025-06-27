@@ -112,21 +112,25 @@ const Footer = () => {
                 <Clock className="mr-2 h-5 w-5 text-primary" />
                 Branch Timings
               </h2>
-              <div className="space-y-4">
+             <div className="space-y-4">
                 <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
                   <h3 className="font-medium text-gray-900 dark:text-white">Vesu Branch</h3>
                   <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
                     Monday to Saturday<br />
                     Morning: 11:00 AM – 1:00 PM<br />
-                    Evening: 4:00 PM – 8:00 PM
+                    Evening: 4:00 PM – 8:00 PM<br />
+                   
                   </p>
                 </div>
                 
                 <div className="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
                   <h3 className="font-medium text-gray-900 dark:text-white">Katargam Branch</h3>
                   <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                    Monday to Friday<br />
-                    Afternoon: 2:30 PM – 4:00 PM
+                    {/* Monday to Friday<br />
+                    Afternoon: 2:30 PM – 4:00 PM <br /> */}
+                     
+                    Sunday<br />
+                    11:00 AM – 12:00 PM
                   </p>
                 </div>
                 
