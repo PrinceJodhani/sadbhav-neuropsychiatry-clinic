@@ -10,7 +10,7 @@ const FindUs = () => {
             {/* Google Map */}
             <div>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59531.28138155688!2d72.74550752160086!3d21.164131662697898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04dc44dfe42f3%3A0x623c23315a63d369!2sDr.%20Jash%20Ajmera%20%7C%20Psychiatrist%20and%20Psychotherapist%20%7C%20Sadbhav%20Neuropsychiatry%20Clinic!5e0!3m2!1sen!2sin!4v1704987126249!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.0587759001746!2d72.77868099999999!3d21.1500591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04dc44dfe42f3%3A0x623c23315a63d369!2sDr.%20Jash%20Ajmera%20%7C%20Psychiatrist%20and%20Psychotherapist%20in%20Surat%20%7C%20Sadbhav%20Neuropsychiatry%20Clinic!5e0!3m2!1sen!2sin!4v1763095117185!5m2!1sen!2sin"
                 width="100%"
                 height="400"
                 style={{ border: 0 }}
@@ -25,14 +25,14 @@ const FindUs = () => {
               <h3 className="text-2xl font-semibold mb-4">Sadbhav Neuropsychiatry Clinic</h3>
               <div className="flex items-center mb-2">
                 <MapPin className="text-blue-600 mr-2" size={20} />
-                <p>209 Vesu Point, Vesu Main Road, Surat, Gujarat 395007</p>
+                <p>208, 4th floor, Someshwar Square, Opp. Aagam Heritage bungalows, Near University Road, Vesu, Surat.</p>
               </div>
               <div className="flex items-center mb-4">
                 <Phone className="text-blue-600 mr-2" size={20} />
                 <p>+91 7861024557</p>
               </div>
               <a
-                href="https://www.google.com/maps/dir/?api=1&destination=209+Vesu+Point,+Vesu+Main+Road,+Surat,+Gujarat+395007"
+                href="https://maps.app.goo.gl/reprPyC8r9cdeKjB7"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-center"

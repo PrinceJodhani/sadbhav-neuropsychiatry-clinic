@@ -29,8 +29,7 @@ const Footer = () => {
               </Link>
               <div className="flex items-start space-x-3 mb-6">
                 <p className="text-base text-gray-600 dark:text-gray-300">
-                  209 Vesu Point, Vesu Main Road, above HDFC Bank,
-                  opp. Vijya Laxmi Hall, Surat, Gujarat 395007.
+                  208, 4th floor, Someshwar Square, Opp. Aagam Heritage bungalows, Near University Road, Vesu, Surat.
                 </p>
               </div>
               <div className="flex items-center space-x-4 mt-6">
