@@ -1,13 +1,153 @@
-"use client";
-
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import ScrollToTop from "@/components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
+import { Providers } from "./providers";
+import type { Metadata, Viewport } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const siteUrl = "https://psychiatristinsurat.in";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default:
+      "Best Psychiatrist in Surat | Dr. Jash Ajmera – Sadbhav Neuropsychiatry Clinic",
+    template: "%s | Dr. Jash Ajmera – Psychiatrist in Surat",
+  },
+  description:
+    "Dr. Jash Ajmera (M.B.B.S., D.P.M.) is a leading psychiatrist in Surat at Sadbhav Neuropsychiatry Clinic, Vesu. Expert, confidential treatment for depression, anxiety, OCD, bipolar disorder, schizophrenia, addiction and more. Rated 4.9★ by 280+ patients. Book an appointment today.",
+  applicationName: "Sadbhav Neuropsychiatry Clinic",
+  authors: [{ name: "Dr. Jash Ajmera", url: siteUrl }],
+  creator: "Dr. Jash Ajmera",
+  publisher: "Sadbhav Neuropsychiatry Clinic",
+  generator: "Next.js",
+  referrer: "origin-when-cross-origin",
+  category: "Health",
+  keywords: [
+    "psychiatrist in surat",
+    "best psychiatrist in surat",
+    "psychiatrist in vesu surat",
+    "top psychiatrist in surat",
+    "Dr Jash Ajmera",
+    "Sadbhav Neuropsychiatry Clinic",
+    "psychiatrist near me surat",
+    "mental health doctor surat",
+    "depression treatment surat",
+    "anxiety treatment surat",
+    "OCD treatment surat",
+    "bipolar disorder treatment surat",
+    "psychiatrist in gujarat",
+    "neuropsychiatrist surat",
+    "psychotherapist in surat",
+  ],
+  manifest: "/images/sadbhav/favicon_io/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      {
+        url: "/images/sadbhav/favicon_io/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/images/sadbhav/favicon_io/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/images/sadbhav/favicon_io/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
+  formatDetection: {
+    telephone: true,
+    address: true,
+    email: true,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "3qDat_WFqV5e8yN7FV2Sr2Qc7m6SLUg4Z2xYJO0U2kQ",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    url: siteUrl,
+    siteName: "Sadbhav Neuropsychiatry Clinic",
+    title: "Best Psychiatrist in Surat | Dr. Jash Ajmera",
+    description:
+      "Leading psychiatrist in Surat (Vesu) offering expert, confidential mental health care at Sadbhav Neuropsychiatry Clinic. Depression, anxiety, OCD, bipolar disorder & more.",
+    images: [
+      {
+        url: "/images/sadbhav/team-itemm.jpg",
+        width: 630,
+        height: 630,
+        alt: "Dr. Jash Ajmera – Best Psychiatrist in Surat, Sadbhav Neuropsychiatry Clinic",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Psychiatrist in Surat | Dr. Jash Ajmera",
+    description:
+      "Leading psychiatrist in Surat offering expert mental health care at Sadbhav Neuropsychiatry Clinic. Book an appointment today.",
+    images: ["/images/sadbhav/team-itemm.jpg"],
+    creator: "@ajmerajash",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Dr. Jash Ajmera",
+    statusBarStyle: "black-translucent",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#4A6CF7",
+};
+
+// Site-wide structured data: WebSite identity + on-site search action.
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${siteUrl}/#website`,
+  url: siteUrl,
+  name: "Sadbhav Neuropsychiatry Clinic – Dr. Jash Ajmera",
+  alternateName: "Best Psychiatrist in Surat",
+  description:
+    "Official website of Dr. Jash Ajmera, a leading psychiatrist in Surat at Sadbhav Neuropsychiatry Clinic.",
+  inLanguage: "en-IN",
+  publisher: { "@id": `${siteUrl}/#clinic` },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${siteUrl}/blogs?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -15,12 +155,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
-      <head />
+    <html suppressHydrationWarning lang="en-IN">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+      </head>
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <Providers>
@@ -28,11 +169,8 @@ export default function RootLayout({
           {children}
           <Footer />
           <ScrollToTop />
-
         </Providers>
       </body>
     </html>
   );
 }
-
-import { Providers } from "./providers";
