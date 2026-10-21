@@ -1,46 +1,121 @@
-import { MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Clock, MapPin, Navigation, Phone, Video } from "lucide-react";
+import { clinic } from "@/lib/clinic";
+import SectionHeading from "./Common/SectionHeading";
+import OpenStatus from "./OpenStatus";
 
 const FindUs = () => {
   return (
-    <section id="find-us" className="py-16 md:py-20 lg:py-28">
+    <section id="clinics" className="section">
       <div className="container">
-        <h2 className="text-3xl font-bold text-center mb-12">Find Us</h2>
-        <div className="bg-white dark:bg-dark p-8 rounded-lg shadow-lg">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Google Map */}
-            <div>
+        <SectionHeading
+          eyebrow="Visit us"
+          title={
+            <>
+              Clinics &amp; <em>timings</em>
+            </>
+          }
+          description="Meet Dr. Jash Ajmera in person at any of our three clinics — or consult online from anywhere in India."
+        />
+
+        <div className="mt-12 grid gap-6 lg:mt-16 lg:grid-cols-12">
+          {/* Map + main clinic address */}
+          <div
+            data-reveal
+            className="flex flex-col overflow-hidden rounded-5xl border border-border/80 bg-card shadow-soft lg:relative lg:col-span-7 lg:min-h-[36rem]"
+          >
+            <div className="relative aspect-[4/3] w-full bg-muted sm:aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.0587759001746!2d72.77868099999999!3d21.1500591!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04dc44dfe42f3%3A0x623c23315a63d369!2sDr.%20Jash%20Ajmera%20%7C%20Psychiatrist%20and%20Psychotherapist%20in%20Surat%20%7C%20Sadbhav%20Neuropsychiatry%20Clinic!5e0!3m2!1sen!2sin!4v1763095117185!5m2!1sen!2sin"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
+                src={clinic.mapEmbedUrl}
+                title="Map showing Sadbhav Neuropsychiatry Clinic in Vesu, Surat"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Sadbhav Neuropsychiatry Clinic Location"
-              ></iframe>
+                allowFullScreen
+                className="absolute inset-0 h-full w-full border-0 dark:hue-rotate-180 dark:invert-[.88]"
+              />
             </div>
-            {/* Clinic Information */}
-            <div className="flex flex-col justify-center">
-              <h3 className="text-2xl font-semibold mb-4">Sadbhav Neuropsychiatry Clinic</h3>
-              <div className="flex items-center mb-2">
-                <MapPin className="text-blue-600 mr-2" size={20} />
-                <p>208, 4th floor, Someshwar Square, Opp. Aagam Heritage bungalows, Near University Road, Vesu, Surat.</p>
+            <div className="relative p-6 lg:absolute lg:inset-x-5 lg:bottom-5 lg:rounded-3xl lg:border lg:border-border/70 lg:bg-card/95 lg:shadow-lift lg:backdrop-blur">
+              <p className="flex items-center gap-2 font-semibold text-foreground">
+                <MapPin className="h-4 w-4 shrink-0 text-highlight" />
+                {clinic.name} · Vesu
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{clinic.address.full}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <a
+                  href={clinic.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary btn-sm"
+                >
+                  <Navigation />
+                  Get directions
+                </a>
+                <a href={clinic.phone.href} className="btn btn-secondary btn-sm">
+                  <Phone />
+                  Call the clinic
+                </a>
               </div>
-              <div className="flex items-center mb-4">
-                <Phone className="text-blue-600 mr-2" size={20} />
-                <p>+91 7861024557</p>
-              </div>
-              <a
-                href="https://maps.app.goo.gl/reprPyC8r9cdeKjB7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-center"
-              >
-                Get Directions
-              </a>
             </div>
           </div>
+
+          {/* Branches */}
+          <ul className="grid content-start gap-4 lg:col-span-5">
+            {clinic.branches.map((branch) => (
+              <li key={branch.id} data-reveal className="surface p-6">
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      <Link
+                        href={`/clinics/${branch.slug}`}
+                        className="underline-offset-4 transition-colors hover:text-primary hover:underline"
+                      >
+                        {branch.name}
+                      </Link>
+                    </h3>
+                    {branch.tag && (
+                      <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.14em] text-highlight">
+                        {branch.tag}
+                      </p>
+                    )}
+                  </div>
+                  <OpenStatus schedule={branch.schedule} />
+                </div>
+                <div className="mt-4 flex items-start gap-3 rounded-2xl bg-muted/70 p-4 text-sm">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <div>
+                    <p className="font-semibold text-foreground">{branch.days}</p>
+                    {branch.times.map((time) => (
+                      <p key={time} className="mt-0.5 text-muted-foreground">
+                        {time}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </li>
+            ))}
+
+            <li
+              data-reveal
+              className="flex flex-col gap-4 rounded-4xl border border-dashed border-primary/30 bg-secondary/60 p-6 xs:flex-row xs:items-center"
+            >
+              <span className="icon-tile bg-primary text-primary-foreground">
+                <Video className="h-5 w-5" />
+              </span>
+              <div className="flex-1">
+                <p className="font-semibold text-foreground">Prefer to consult online?</p>
+                <p className="mt-0.5 text-sm text-muted-foreground">
+                  Discreet e-consults with pan-India medicine delivery.
+                </p>
+              </div>
+              <Link
+                href="/online-psychiatrist-consultation"
+                className="btn btn-secondary btn-sm self-start xs:self-auto"
+              >
+                How it works
+                <ArrowRight />
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

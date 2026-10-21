@@ -1,57 +1,60 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState, FormEvent } from 'react';
 import { Search as SearchIcon } from 'lucide-react';
 
 interface SearchBarProps {
   defaultValue?: string;
+  tags?: string[];
 }
 
-export default function SearchBar({ defaultValue = '' }: SearchBarProps) {
+export default function SearchBar({ defaultValue = '', tags = [] }: SearchBarProps) {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState(defaultValue);
-  const searchParams = useSearchParams();
 
   const handleSearch = (e: FormEvent) => {
     e.preventDefault();
     const query = searchInput.trim();
-    // Push a new route with ?q=someQuery
-    router.push(`/blogs?q=${encodeURIComponent(query)}`);
+    // Push a new route with ?q=someQuery (or back to the full list).
+    router.push(query ? `/blogs?q=${encodeURIComponent(query)}` : '/blogs');
   };
 
-  // Minimal suggestion logic:
-  const showHashtagSuggestion = searchInput.startsWith('#');
-
   return (
-    <form onSubmit={handleSearch} className="flex flex-col items-center gap-2 w-full max-w-xl mx-auto mb-6">
-      <div className="relative w-full">
+    <div className="mx-auto w-full max-w-xl">
+      <form onSubmit={handleSearch} role="search" className="relative">
+        <label htmlFor="blog-search" className="sr-only">
+          Search articles
+        </label>
+        <SearchIcon className="pointer-events-none absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
         <input
-          type="text"
+          id="blog-search"
+          type="search"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
-          placeholder="Search blogs (e.g. #Anxiety or a title)..."
-          className="w-full rounded-full border-2 border-gray-300 py-2 px-4 pl-10 
-                     text-sm placeholder-gray-400 focus:outline-none 
-                     focus:ring-2 focus:ring-blue-500 transition"
+          placeholder="Search articles or #topics…"
+          className="h-14 w-full rounded-full border border-border bg-card pl-14 pr-32 text-base text-foreground shadow-soft outline-none transition placeholder:text-muted-foreground focus:border-primary/50 focus:ring-4 focus:ring-primary/15"
         />
-        <SearchIcon className="absolute left-3 top-2.5 w-5 h-5 text-gray-400" />
-      </div>
+        <button type="submit" className="btn btn-primary absolute right-1.5 top-1/2 h-11 -translate-y-1/2 px-5 text-sm">
+          Search
+        </button>
+      </form>
 
-      {/* If user typed '#' at the start, show a small hint */}
-      {showHashtagSuggestion && (
-        <p className="text-xs text-blue-600">
-          Searching by hashtag. You can type “#depression”, “#anxiety” etc.
-        </p>
+      {tags.length > 0 && (
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+          <span className="text-sm text-muted-foreground">Popular:</span>
+          {tags.map((tag) => (
+            <Link
+              key={tag}
+              href={`/blogs?q=${encodeURIComponent(`#${tag}`)}`}
+              className="chip transition-colors hover:border-primary/40 hover:text-primary"
+            >
+              #{tag}
+            </Link>
+          ))}
+        </div>
       )}
-
-      <button
-        type="submit"
-        className="mt-2 inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm 
-                   font-medium rounded-full hover:bg-blue-700 transition"
-      >
-        Search
-      </button>
-    </form>
+    </div>
   );
 }

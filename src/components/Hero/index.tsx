@@ -1,290 +1,117 @@
-import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight, GraduationCap, Phone, ShieldCheck } from "lucide-react";
+import { clinic } from "@/lib/clinic";
+import GoogleRating from "../GoogleRating";
 
-const Hero = () => {
+const Hero = ({ rating, reviewCount }: { rating: number; reviewCount: number }) => {
   return (
-    <>
-      <section
-        id="home"
-        className="relative z-10 overflow-hidden bg-white pb-16 pt-[120px] dark:bg-gray-dark md:pb-[120px] md:pt-[150px] xl:pb-[160px] xl:pt-[180px] 2xl:pb-[200px] 2xl:pt-[210px]"
-      >
-        <div className="container">
-          <div className="-mx-4 flex flex-wrap">
-            <div className="w-full px-4">
-              <div className="mx-auto max-w-[800px] text-center">
-                {/* Tagline from old site */}
-                <span className="inline-block bg-gray-100 text-gray-800 px-4 py-2 rounded-full uppercase font-semibold mb-4 dark:bg-gray-700 dark:text-gray-200">
-                  Live Your Life
+    <section
+      id="home"
+      className="relative isolate overflow-hidden pb-16 pt-28 sm:pt-32 lg:pb-24 lg:pt-36 xl:pt-40"
+    >
+      <div aria-hidden="true" className="bg-aurora absolute inset-0 -z-20" />
+      <div aria-hidden="true" className="bg-dots absolute inset-0 -z-10" />
+
+      <div className="container">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-7">
+            {/* One H1 holding both the search phrase and the tagline. The tagline is not
+                animated: it is the LCP element on most screens. */}
+            <h1>
+              <span className="eyebrow animate-fade-up">Psychiatrist &amp; Psychotherapist in Surat</span>
+              <span className="heading-display mt-5 block text-[2.75rem] leading-[1.02] text-foreground xs:text-[3.25rem] sm:text-6xl xl:text-[4.6rem]">
+                No health without <em>mental&nbsp;health.</em>
+              </span>
+            </h1>
+
+            <p className="lead mt-6 max-w-xl animate-fade-up [animation-delay:80ms]">
+              At {clinic.name}, {clinic.doctor.name} offers confidential, evidence-based care
+              for depression, anxiety, OCD, bipolar disorder, addiction and more — blending
+              psychotherapy with safe, effective medication.
+            </p>
+
+            <div className="mt-9 flex animate-fade-up flex-col gap-3 [animation-delay:160ms] xs:flex-row">
+              <a
+                href={clinic.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-lg group"
+              >
+                Book an appointment
+                <ArrowRight className="transition-transform duration-200 group-hover:translate-x-0.5" />
+              </a>
+              <a href={clinic.phone.href} className="btn btn-secondary btn-lg">
+                <Phone />
+                {clinic.phone.display}
+              </a>
+            </div>
+
+            <div className="mt-11 flex animate-fade-up flex-wrap items-center gap-x-8 gap-y-6 [animation-delay:240ms]">
+              <GoogleRating rating={rating} reviewCount={reviewCount} />
+              <span aria-hidden="true" className="hidden h-10 w-px bg-border sm:block" />
+              <dl className="flex gap-8">
+                {clinic.stats.slice(0, 2).map((stat) => (
+                  <div key={stat.label} className="flex flex-col-reverse">
+                    <dt className="mt-0.5 text-sm text-muted-foreground">{stat.label}</dt>
+                    <dd className="heading-display text-[1.75rem] leading-none text-foreground">
+                      {stat.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+
+          <div className="relative lg:col-span-5">
+            <div className="relative mx-auto w-full max-w-[21rem] [--arch-aspect:0.897] sm:max-w-[24rem] lg:max-w-[27rem]">
+              {/* Offset outline arch */}
+              <div
+                aria-hidden="true"
+                className="arch absolute -right-3 -top-3 bottom-3 left-3 border-2 border-highlight/25 sm:-right-5 sm:-top-5 sm:bottom-5 sm:left-5"
+              />
+              {/* Soft glow beneath the portrait */}
+              <div
+                aria-hidden="true"
+                className="absolute -bottom-12 left-1/2 h-48 w-4/5 -translate-x-1/2 rounded-full bg-brand-400/35 blur-3xl dark:bg-brand-400/15"
+              />
+
+              <div className="arch relative aspect-[900/1003] overflow-hidden bg-[#E8F0F2] shadow-lift ring-1 ring-black/5">
+                <Image
+                  src="/images/sadbhav/dr-jash-ajmera-portrait.jpg"
+                  alt="Dr. Jash Ajmera, psychiatrist and psychotherapist in Surat"
+                  fill
+                  priority
+                  sizes="(min-width: 992px) 27rem, (min-width: 575px) 24rem, 21rem"
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="absolute -left-3 bottom-10 flex animate-fade-up items-center gap-3 rounded-2xl border border-border/70 bg-card/90 p-3 pr-4 shadow-lift backdrop-blur-md [animation-delay:320ms] sm:-left-10">
+                <span className="icon-tile h-11 w-11 rounded-xl bg-brand-50 text-brand-700 dark:bg-brand-400/10 dark:text-brand-300">
+                  <GraduationCap className="h-5 w-5" />
                 </span>
-                {/* Main heading from old site */}
-                <h1 className="mb-5 text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl sm:leading-tight md:text-5xl md:leading-tight">
-                  No Health Without Mental Health
-                </h1>
-                {/* Subheading from old site */}
-                <p className="mb-12 text-base !leading-relaxed text-body-color dark:text-body-color-dark sm:text-lg md:text-xl">
-                  At Sadbhav Neuropsychiatry Clinic, we provide neuroscience-driven and empathetic solutions for every mental health challenge. Experience holistic care through integrated psychotherapy and medication.
-                </p>
-                {/* CTA button from old site */}
-                <div className="flex flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                  <a
-                    href="tel:+917861024557"
-                    className="rounded-sm dark:text-gray-900 bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80"
-                  >
-                    Contact Us
-                  </a>
-                </div>
+                <span className="leading-tight">
+                  <span className="block text-sm font-semibold text-foreground">
+                    {clinic.doctor.name}
+                  </span>
+                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                    {clinic.doctor.credentials}
+                  </span>
+                </span>
+              </div>
+
+              {/* Hidden on phones, where it would cover the face. */}
+              <div className="absolute top-[9%] hidden animate-fade-up items-center gap-2.5 rounded-2xl border border-border/70 bg-card/90 py-2.5 pl-2.5 pr-4 shadow-lift backdrop-blur-md [animation-delay:420ms] sm:-right-12 sm:flex lg:-right-14">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-lotus-50 text-lotus-600 dark:bg-lotus-400/10 dark:text-lotus-300">
+                  <ShieldCheck className="h-4 w-4" />
+                </span>
+                <span className="text-sm font-semibold text-foreground">100% confidential</span>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative SVG (top-right) from template */}
-        <div className="absolute right-0 top-0 z-[-1] opacity-30 lg:opacity-100">
-          <svg
-            width="450"
-            height="556"
-            viewBox="0 0 450 556"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="277" cy="63" r="225" fill="url(#paint0_linear_25:217)" />
-            <circle
-              cx="17.9997"
-              cy="182"
-              r="18"
-              fill="url(#paint1_radial_25:217)"
-            />
-            <circle
-              cx="76.9997"
-              cy="288"
-              r="34"
-              fill="url(#paint2_radial_25:217)"
-            />
-            <circle
-              cx="325.486"
-              cy="302.87"
-              r="180"
-              transform="rotate(-37.6852 325.486 302.87)"
-              fill="url(#paint3_linear_25:217)"
-            />
-            <circle
-              opacity="0.8"
-              cx="184.521"
-              cy="315.521"
-              r="132.862"
-              transform="rotate(114.874 184.521 315.521)"
-              stroke="url(#paint4_linear_25:217)"
-            />
-            <circle
-              opacity="0.8"
-              cx="356"
-              cy="290"
-              r="179.5"
-              transform="rotate(-30 356 290)"
-              stroke="url(#paint5_linear_25:217)"
-            />
-            <circle
-              opacity="0.8"
-              cx="191.659"
-              cy="302.659"
-              r="133.362"
-              transform="rotate(133.319 191.659 302.659)"
-              fill="url(#paint6_linear_25:217)"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_25:217"
-                x1="-54.5003"
-                y1="-178"
-                x2="222"
-                y2="288"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-              </linearGradient>
-              <radialGradient
-                id="paint1_radial_25:217"
-                cx="0"
-                cy="0"
-                r="1"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(17.9997 182) rotate(90) scale(18)"
-              >
-                <stop offset="0.145833" stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.08" />
-              </radialGradient>
-              <radialGradient
-                id="paint2_radial_25:217"
-                cx="0"
-                cy="0"
-                r="1"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(76.9997 288) rotate(90) scale(34)"
-              >
-                <stop offset="0.145833" stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0.08" />
-              </radialGradient>
-              <linearGradient
-                id="paint3_linear_25:217"
-                x1="226.775"
-                y1="-66.1548"
-                x2="292.157"
-                y2="351.421"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint4_linear_25:217"
-                x1="184.521"
-                y1="182.159"
-                x2="184.521"
-                y2="448.882"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="white" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint5_linear_25:217"
-                x1="356"
-                y1="110"
-                x2="356"
-                y2="470"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="white" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient
-                id="paint6_linear_25:217"
-                x1="118.524"
-                y1="29.2497"
-                x2="166.965"
-                y2="338.63"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </div>
-
-        {/* Decorative SVG (bottom-left) from template */}
-        <div className="absolute bottom-0 left-0 z-[-1] opacity-30 lg:opacity-100">
-          <svg
-            width="364"
-            height="201"
-            viewBox="0 0 364 201"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M5.88928 72.3303C33.6599 66.4798 101.397 64.9086 150.178 105.427C211.155 156.076 229.59 162.093 264.333 166.607C299.076 171.12 337.718 183.657 362.889 212.24"
-              stroke="url(#paint0_linear_25:218)"
-            />
-            <path
-              d="M-22.1107 72.3303C5.65989 66.4798 73.3965 64.9086 122.178 105.427C183.155 156.076 201.59 162.093 236.333 166.607C271.076 171.12 309.718 183.657 334.889 212.24"
-              stroke="url(#paint1_linear_25:218)"
-            />
-            <path
-              d="M-53.1107 72.3303C-25.3401 66.4798 42.3965 64.9086 91.1783 105.427C152.155 156.076 170.59 162.093 205.333 166.607C240.076 171.12 278.718 183.657 303.889 212.24"
-              stroke="url(#paint2_linear_25:218)"
-            />
-            <path
-              d="M-98.1618 65.0889C-68.1416 60.0601 4.73364 60.4882 56.0734 102.431C120.248 154.86 139.905 161.419 177.137 166.956C214.37 172.493 255.575 186.165 281.856 215.481"
-              stroke="url(#paint3_linear_25:218)"
-            />
-            <circle
-              opacity="0.8"
-              cx="214.505"
-              cy="60.5054"
-              r="49.7205"
-              transform="rotate(-13.421 214.505 60.5054)"
-              stroke="url(#paint4_linear_25:218)"
-            />
-            <circle
-              cx="220"
-              cy="63"
-              r="43"
-              fill="url(#paint5_radial_25:218)"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_25:218"
-                x1="184.389"
-                y1="69.2405"
-                x2="184.389"
-                y2="212.24"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
-              </linearGradient>
-              <linearGradient
-                id="paint1_linear_25:218"
-                x1="156.389"
-                y1="69.2405"
-                x2="156.389"
-                y2="212.24"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
-              </linearGradient>
-              <linearGradient
-                id="paint2_linear_25:218"
-                x1="125.389"
-                y1="69.2405"
-                x2="125.389"
-                y2="212.24"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
-              </linearGradient>
-              <linearGradient
-                id="paint3_linear_25:218"
-                x1="93.8507"
-                y1="67.2674"
-                x2="89.9278"
-                y2="210.214"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" stopOpacity="0" />
-                <stop offset="1" stopColor="#4A6CF7" />
-              </linearGradient>
-              <linearGradient
-                id="paint4_linear_25:218"
-                x1="214.505"
-                y1="10.2849"
-                x2="212.684"
-                y2="99.5816"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stopColor="#4A6CF7" />
-                <stop offset="1" stopColor="#4A6CF7" stopOpacity="0" />
-              </linearGradient>
-              <radialGradient
-                id="paint5_radial_25:218"
-                cx="0"
-                cy="0"
-                r="1"
-                gradientUnits="userSpaceOnUse"
-                gradientTransform="translate(220 63) rotate(90) scale(43)"
-              >
-                <stop offset="0.145833" stopColor="white" stopOpacity="0" />
-                <stop offset="1" stopColor="white" stopOpacity="0.08" />
-              </radialGradient>
-            </defs>
-          </svg>
-        </div>
-
-       
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

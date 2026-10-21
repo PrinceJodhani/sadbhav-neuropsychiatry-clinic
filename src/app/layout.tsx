@@ -1,13 +1,34 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { buildNav } from "@/components/Header/nav";
+import MobileActionBar from "@/components/MobileActionBar";
 import ScrollToTop from "@/components/ScrollToTop";
-import { Inter } from "next/font/google";
-import "node_modules/react-modal-video/css/modal-video.css";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "../styles/index.css";
 import { Providers } from "./providers";
 import type { Metadata, Viewport } from "next";
+import reviewsData from "../../public/reviews.json";
 
-const inter = Inter({ subsets: ["latin"] });
+// Fonts are self-hosted and preloaded by next/font: no render-blocking request to Google Fonts.
+const sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+// Fraunces (SIL OFL) static 72pt optical-size cut, latin subset: ~41 KB for both
+// styles instead of ~270 KB for the full variable font.
+const display = localFont({
+  src: [
+    { path: "./fonts/fraunces-72pt-regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/fraunces-72pt-italic.woff2", weight: "400", style: "italic" },
+  ],
+  display: "swap",
+  variable: "--font-display",
+  fallback: ["Georgia", "serif"],
+  adjustFontFallback: "Times New Roman",
+});
 
 const siteUrl = "https://psychiatristinsurat.in";
 
@@ -16,10 +37,10 @@ export const metadata: Metadata = {
   title: {
     default:
       "Best Psychiatrist in Surat | Dr. Jash Ajmera – Sadbhav Neuropsychiatry Clinic",
-    template: "%s | Dr. Jash Ajmera – Psychiatrist in Surat",
+    template: "%s | Dr. Jash Ajmera",
   },
   description:
-    "Dr. Jash Ajmera (M.B.B.S., D.P.M.) is a leading psychiatrist in Surat at Sadbhav Neuropsychiatry Clinic, Vesu. Expert, confidential treatment for depression, anxiety, OCD, bipolar disorder, schizophrenia, addiction and more. Rated 4.9★ by 280+ patients. Book an appointment today.",
+    `Dr. Jash Ajmera (M.B.B.S., D.P.M.) is a leading psychiatrist in Surat at Sadbhav Neuropsychiatry Clinic, Vesu. Expert, confidential treatment for depression, anxiety, OCD, bipolar disorder, schizophrenia, addiction and more. Rated ${reviewsData.place_info.rating}★ by ${reviewsData.place_info.reviews}+ patients on Google. In-person in Surat & Ankleshwar, and online across India.`,
   applicationName: "Sadbhav Neuropsychiatry Clinic",
   authors: [{ name: "Dr. Jash Ajmera", url: siteUrl }],
   creator: "Dr. Jash Ajmera",
@@ -88,6 +109,8 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "3qDat_WFqV5e8yN7FV2Sr2Qc7m6SLUg4Z2xYJO0U2kQ",
+    // Bing Webmaster Tools
+    other: { "msvalidate.01": "EFEC1F0B87EE9E3FD365BFC02F2835BD" },
   },
   openGraph: {
     type: "website",
@@ -97,21 +120,12 @@ export const metadata: Metadata = {
     title: "Best Psychiatrist in Surat | Dr. Jash Ajmera",
     description:
       "Leading psychiatrist in Surat (Vesu) offering expert, confidential mental health care at Sadbhav Neuropsychiatry Clinic. Depression, anxiety, OCD, bipolar disorder & more.",
-    images: [
-      {
-        url: "/images/sadbhav/team-itemm.jpg",
-        width: 630,
-        height: 630,
-        alt: "Dr. Jash Ajmera – Best Psychiatrist in Surat, Sadbhav Neuropsychiatry Clinic",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Best Psychiatrist in Surat | Dr. Jash Ajmera",
     description:
       "Leading psychiatrist in Surat offering expert mental health care at Sadbhav Neuropsychiatry Clinic. Book an appointment today.",
-    images: ["/images/sadbhav/team-itemm.jpg"],
     creator: "@ajmerajash",
   },
   appleWebApp: {
@@ -124,7 +138,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#4A6CF7",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FAF7F4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A171B" },
+  ],
 };
 
 // Site-wide structured data: WebSite identity + on-site search action.
@@ -155,7 +172,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en-IN">
+    <html
+      suppressHydrationWarning
+      lang="en-IN"
+      className={`${sans.variable} ${display.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
@@ -163,12 +184,21 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+      <body>
         <Providers>
-          <Header />
-          {children}
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-primary-foreground"
+          >
+            Skip to content
+          </a>
+          <Header nav={buildNav()} />
+          <main id="main" tabIndex={-1} className="outline-none">
+            {children}
+          </main>
           <Footer />
           <ScrollToTop />
+          <MobileActionBar />
         </Providers>
       </body>
     </html>
