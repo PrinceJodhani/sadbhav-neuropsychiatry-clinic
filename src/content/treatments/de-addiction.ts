@@ -7,9 +7,9 @@ const deAddiction: ContentPage = {
   name: "De-addiction treatment",
   tagline: "Help for alcohol, tobacco, drugs, gaming and betting",
   icon: Sprout,
-  title: "De-addiction Treatment in Surat – Nasha Mukti & Vyasan Mukti",
+  title: "De-addiction & Nasha Mukti Treatment in Surat",
   description:
-    "Confidential, psychiatrist-led de-addiction treatment in Surat for alcohol, tobacco, ganja, opioids, sleeping pills, gaming and betting. Safe detox, medicines and counselling.",
+    "Confidential de-addiction (nasha mukti, vyasan mukti) in Surat for alcohol, tobacco, ganja, opioids, pills, gaming and betting. Safe detox and counselling.",
   h1: "De-addiction treatment in *Surat*",
   eyebrow: "Treatment · Nasha mukti / Vyasan mukti",
   summary:

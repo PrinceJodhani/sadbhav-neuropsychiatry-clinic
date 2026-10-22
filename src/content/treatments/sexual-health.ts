@@ -7,9 +7,9 @@ const sexualHealth: ContentPage = {
   name: "Sexual health (sexologist)",
   tagline: "Confidential care for premature ejaculation, ED and more",
   icon: HeartHandshake,
-  title: "Sexologist in Surat – Psychosexual Treatment by a Qualified Doctor",
+  title: "Sexologist in Surat – Psychosexual Treatment",
   description:
-    "Confidential treatment in Surat (Vesu) and online for premature ejaculation, erectile dysfunction, low desire, performance anxiety and Dhat worries, by psychiatrist Dr. Jash Ajmera.",
+    "Confidential treatment in Surat and online for premature ejaculation, erectile dysfunction, low desire and performance anxiety, by Dr. Jash Ajmera.",
   h1: "Sexual health & sexologist care in *Surat*",
   eyebrow: "Treatment · Psychosexual medicine",
   summary:

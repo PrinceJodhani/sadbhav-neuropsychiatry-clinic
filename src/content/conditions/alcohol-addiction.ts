@@ -7,9 +7,9 @@ const alcoholAddiction: ContentPage = {
   name: "Alcohol addiction",
   tagline: "Craving, loss of control and withdrawal symptoms",
   icon: Wine,
-  title: "Alcohol Addiction Treatment in Surat – Safe Detox & Recovery",
+  title: "Alcohol Addiction Treatment & Detox in Surat",
   description:
-    "Can’t stop drinking? Learn the signs of alcohol addiction, the dangers of sudden withdrawal and how medical treatment helps. Confidential alcohol de-addiction in Surat.",
+    "Can’t stop drinking? Signs of alcohol addiction, the dangers of sudden withdrawal and how medical treatment helps. Confidential de-addiction in Surat.",
   h1: "Alcohol addiction treatment in *Surat*",
   eyebrow: "Condition guide · Alcohol use disorder",
   summary:

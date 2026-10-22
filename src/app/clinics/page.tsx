@@ -5,9 +5,9 @@ import { clinicPages } from "@/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Clinic Locations & Timings – Vesu, Katargam & Ankleshwar",
+  title: "Clinic Timings: Vesu, Katargam & Ankleshwar",
   description:
-    "Visit Dr. Jash Ajmera at Sadbhav Neuropsychiatry Clinic in Vesu (Mon–Sat) and Katargam (Sunday), Surat, and in Ankleshwar (Saturday) — or consult online. Address, timings and directions.",
+    "Visit Dr. Jash Ajmera at Sadbhav Neuropsychiatry Clinic: Vesu (Mon–Sat) and Katargam (Sun) in Surat, and Ankleshwar (Sat). Address, timings, directions.",
   path: "/clinics",
 });
 

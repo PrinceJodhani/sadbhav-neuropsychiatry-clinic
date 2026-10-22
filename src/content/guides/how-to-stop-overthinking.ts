@@ -7,9 +7,9 @@ const overthinking: ContentPage = {
   name: "How to stop overthinking",
   tagline: "10 techniques that work — and when it’s anxiety",
   icon: Cloudy,
-  title: "How to Stop Overthinking – 10 Techniques That Work",
+  title: "How to Stop Overthinking: 10 Techniques",
   description:
-    "Can’t stop overthinking, especially at night? 10 practical, psychiatrist-recommended techniques, why overthinking happens, and when it is a sign of anxiety, depression or OCD.",
+    "Can’t stop overthinking, especially at night? 10 practical techniques, why it happens, and when it is a sign of anxiety, depression or OCD.",
   h1: "How to stop *overthinking*: 10 techniques that work",
   eyebrow: "Guide · Self-help",
   summary:

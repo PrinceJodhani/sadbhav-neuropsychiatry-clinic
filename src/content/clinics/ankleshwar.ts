@@ -8,9 +8,9 @@ const ankleshwar: ContentPage = {
   name: "Ankleshwar",
   tagline: "Saturday clinic for Ankleshwar and Bharuch",
   icon: Building2,
-  title: "Psychiatrist in Ankleshwar & Bharuch – Saturday Clinic",
+  title: "Psychiatrist in Ankleshwar & Bharuch",
   description:
-    "Dr. Jash Ajmera consults in Ankleshwar every Saturday, 9 AM–12 PM, for patients from Ankleshwar, Bharuch, Jhagadia, Hansot and Valia. Depression, anxiety, addiction, sleep and more.",
+    "Dr. Jash Ajmera consults in Ankleshwar every Saturday, 9 AM–12 PM, for patients from Ankleshwar, Bharuch, Jhagadia, Hansot and Valia.",
   h1: "Psychiatrist in *Ankleshwar* & Bharuch",
   eyebrow: "Branch clinic · Ankleshwar",
   summary:

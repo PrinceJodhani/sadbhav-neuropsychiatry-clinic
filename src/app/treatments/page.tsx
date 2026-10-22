@@ -4,9 +4,9 @@ import { onlinePages, treatments } from "@/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Treatments – Psychotherapy, De-addiction & Online Psychiatry in Surat",
+  title: "Treatments: Therapy, De-addiction & Online",
   description:
-    "Psychotherapy and counselling, de-addiction, sexual health, child and adolescent care, and online consultations across India and abroad with psychiatrist Dr. Jash Ajmera.",
+    "Psychotherapy, de-addiction, sexual health, child and teen care, and online consultations across India and abroad with psychiatrist Dr. Jash Ajmera.",
   path: "/treatments",
 });
 

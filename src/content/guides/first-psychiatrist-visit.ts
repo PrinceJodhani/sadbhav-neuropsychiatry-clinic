@@ -7,9 +7,9 @@ const firstVisit: ContentPage = {
   name: "Your first psychiatrist visit",
   tagline: "What happens, what to bring and questions to ask",
   icon: ClipboardList,
-  title: "First Visit to a Psychiatrist – What to Expect & How to Prepare",
+  title: "First Psychiatrist Visit: What to Expect",
   description:
-    "Nervous about your first psychiatrist appointment? What the doctor will ask, what to bring, whether you’ll get medicines, and questions to ask — explained by a Surat psychiatrist.",
+    "Nervous about your first psychiatrist appointment? What the doctor asks, what to bring, whether you’ll get medicines, and questions to ask.",
   h1: "Your first visit to a psychiatrist: *what to expect*",
   eyebrow: "Guide · Getting help",
   summary:

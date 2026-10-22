@@ -7,9 +7,9 @@ const psychotherapy: ContentPage = {
   name: "Psychotherapy & counselling",
   tagline: "Evidence-based talk therapy with a psychiatrist",
   icon: MessagesSquare,
-  title: "Psychotherapy & Counselling in Surat – CBT & Talk Therapy",
+  title: "Psychotherapy & Counselling in Surat – CBT",
   description:
-    "Confidential psychotherapy and counselling in Surat and online with psychiatrist Dr. Jash Ajmera — CBT, ERP, emotion-management therapy for anxiety, depression, OCD, stress and relationships.",
+    "Confidential psychotherapy and counselling in Surat and online with psychiatrist Dr. Jash Ajmera: CBT, ERP and emotion-focused therapy.",
   h1: "Psychotherapy & counselling in *Surat* & online",
   eyebrow: "Treatment · Psychotherapy",
   summary:

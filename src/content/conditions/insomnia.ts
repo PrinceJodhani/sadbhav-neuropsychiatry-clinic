@@ -7,9 +7,9 @@ const insomnia: ContentPage = {
   name: "Insomnia & sleep problems",
   tagline: "Trouble falling asleep, staying asleep or waking early",
   icon: Moon,
-  title: "Insomnia Treatment in Surat – Sleep Problems & Sleep Doctor",
+  title: "Insomnia & Sleep Problem Treatment in Surat",
   description:
-    "Can’t sleep at night? Learn the causes of insomnia, safe treatment without long-term sleeping pills, and CBT for insomnia. Sleep problem treatment in Surat and online.",
+    "Can’t sleep at night? Causes of insomnia, CBT for insomnia and safe use of sleeping pills. Sleep problem treatment in Surat and online.",
   h1: "Insomnia & sleep problem treatment in *Surat*",
   eyebrow: "Condition guide · Sleep",
   summary:

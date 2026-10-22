@@ -6,9 +6,9 @@ import { guides } from "@/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Mental Health Guides – Answers From a Psychiatrist",
+  title: "Mental Health Guides by a Psychiatrist",
   description:
-    "Psychiatrist vs psychologist, when to see a psychiatrist, your first visit, psychiatric medicine myths, helping a loved one, overthinking and your rights — explained by Dr. Jash Ajmera.",
+    "Psychiatrist vs psychologist, first visits, medicine myths, overthinking, helping a loved one and your rights: clear answers from Dr. Jash Ajmera.",
   path: "/guides",
 });
 

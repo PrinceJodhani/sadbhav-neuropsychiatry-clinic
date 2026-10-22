@@ -8,9 +8,9 @@ const vesu: ContentPage = {
   name: "Vesu, Surat",
   tagline: "Main clinic · Monday–Saturday",
   icon: Building2,
-  title: "Psychiatrist in Vesu, Surat – Sadbhav Neuropsychiatry Clinic",
+  title: "Psychiatrist in Vesu, Surat – Sadbhav Clinic",
   description:
-    "Dr. Jash Ajmera’s main clinic at Someshwar Square, near University Road, Vesu, Surat. Open Monday–Saturday, 11 AM–1 PM & 4–8 PM. Psychiatry, psychotherapy, de-addiction and sexual health.",
+    "Dr. Jash Ajmera’s main clinic at Someshwar Square, near University Road, Vesu, Surat. Open Mon–Sat, 11 AM–1 PM & 4–8 PM. Book or get directions.",
   h1: "Psychiatrist in *Vesu*, Surat",
   eyebrow: "Main clinic · Vesu, Surat",
   summary:

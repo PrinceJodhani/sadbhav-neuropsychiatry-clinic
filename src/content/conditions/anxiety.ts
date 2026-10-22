@@ -7,7 +7,7 @@ const anxiety: ContentPage = {
   name: "Anxiety disorders",
   tagline: "Constant worry, restlessness and physical tension",
   icon: Waves,
-  title: "Anxiety Treatment in Surat – Symptoms, Causes & Care",
+  title: "Anxiety Treatment in Surat: Symptoms & Care",
   description:
     "Constant worry, restlessness or a racing heart? Learn about anxiety symptoms, causes and treatment. Anxiety treatment in Surat and online with Dr. Jash Ajmera.",
   h1: "Anxiety treatment in *Surat* & online",

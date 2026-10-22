@@ -7,9 +7,9 @@ const ocd: ContentPage = {
   name: "OCD",
   tagline: "Unwanted intrusive thoughts and repetitive rituals",
   icon: RefreshCcw,
-  title: "OCD Treatment in Surat – Symptoms, Causes & ERP Therapy",
+  title: "OCD Treatment in Surat: Symptoms & ERP Therapy",
   description:
-    "Intrusive thoughts, repeated washing or checking? Learn OCD symptoms, causes and how ERP therapy and medicines help. OCD treatment in Surat and online with Dr. Jash Ajmera.",
+    "Intrusive thoughts, repeated washing or checking? OCD symptoms, causes and how ERP therapy and medicines help. OCD treatment in Surat and online.",
   h1: "OCD treatment in *Surat* & online",
   eyebrow: "Condition guide · Obsessive-compulsive disorder",
   summary:

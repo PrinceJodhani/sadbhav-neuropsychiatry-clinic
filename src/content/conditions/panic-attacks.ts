@@ -7,9 +7,9 @@ const panicAttacks: ContentPage = {
   name: "Panic attacks",
   tagline: "Sudden surges of fear with a pounding heart",
   icon: HeartPulse,
-  title: "Panic Attack Treatment in Surat – Symptoms & Panic Disorder",
+  title: "Panic Attacks: Symptoms & Treatment in Surat",
   description:
-    "Racing heart, breathlessness and fear of dying? Learn panic attack symptoms, how they differ from a heart attack, and panic disorder treatment in Surat and online.",
+    "Racing heart, breathlessness, fear of dying? Panic attack symptoms, panic vs heart attack, and panic disorder treatment in Surat and online.",
   h1: "Panic attack treatment in *Surat* & online",
   eyebrow: "Condition guide · Panic disorder",
   summary:

@@ -7,9 +7,9 @@ const stressBurnout: ContentPage = {
   name: "Stress & burnout",
   tagline: "Exhaustion, irritability and anger from constant pressure",
   icon: Flame,
-  title: "Stress & Burnout Treatment in Surat – Signs, Anger & Exam Stress",
+  title: "Stress, Burnout & Anger Management in Surat",
   description:
-    "Always tired, irritable or angry? Learn the signs of chronic stress and burnout, exam stress and anger problems, and how a psychiatrist helps. Stress management in Surat and online.",
+    "Always tired, irritable or angry? Signs of chronic stress, burnout, exam stress and anger problems, and how a psychiatrist helps, in Surat and online.",
   h1: "Stress, burnout & anger management in *Surat*",
   eyebrow: "Condition guide · Stress",
   summary:

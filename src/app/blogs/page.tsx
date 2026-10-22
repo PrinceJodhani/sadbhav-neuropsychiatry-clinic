@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = pageMetadata({
   title: "Mental Health Articles & Blog",
   description:
-    "Articles by psychiatrist Dr. Jash Ajmera on depression, anxiety, OCD, bipolar disorder, parenting, relationships and everyday mental wellbeing. Search by topic or tag.",
+    "Articles by psychiatrist Dr. Jash Ajmera on depression, anxiety, OCD, parenting, relationships and everyday mental wellbeing. Search by topic.",
   path: "/blogs",
 });
 

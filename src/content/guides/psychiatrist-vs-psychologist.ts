@@ -7,9 +7,9 @@ const psychiatristVsPsychologist: ContentPage = {
   name: "Psychiatrist vs psychologist",
   tagline: "And counsellors, therapists and neurologists — who does what",
   icon: Scale,
-  title: "Psychiatrist vs Psychologist vs Counsellor – Who Should You See?",
+  title: "Psychiatrist vs Psychologist – Who to See?",
   description:
-    "What is the difference between a psychiatrist, psychologist, counsellor, therapist and neurologist in India? Training, who can prescribe medicines, and who to see first.",
+    "Psychiatrist, psychologist, counsellor or neurologist? Training, who can prescribe medicines, and who to see first in India, explained by a psychiatrist.",
   h1: "Psychiatrist vs psychologist: *who should you see?*",
   eyebrow: "Guide · Getting help",
   summary:

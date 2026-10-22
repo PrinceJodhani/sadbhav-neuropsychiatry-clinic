@@ -24,9 +24,9 @@ const crumbs = [
 ];
 
 export const metadata: Metadata = pageMetadata({
-  title: "Patient FAQs – Appointments, Online Consults, Medicines & Privacy",
+  title: "Patient FAQs – Psychiatrist in Surat",
   description:
-    "Answers to common questions about seeing psychiatrist Dr. Jash Ajmera in Surat: booking, clinic timings, online consultations, medicines, confidentiality, insurance and emergencies.",
+    "Answers about booking, clinic timings, online consultations, medicines, confidentiality and insurance for patients of Dr. Jash Ajmera in Surat.",
   path,
 });
 

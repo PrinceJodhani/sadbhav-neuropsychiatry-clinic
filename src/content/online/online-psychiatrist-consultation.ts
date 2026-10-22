@@ -7,9 +7,9 @@ const onlineConsultation: ContentPage = {
   name: "Online consultation",
   tagline: "Private video consultations from anywhere in India",
   icon: Video,
-  title: "Online Psychiatrist Consultation in India – Book a Video Consult",
+  title: "Online Psychiatrist Consultation in India",
   description:
-    "Consult psychiatrist Dr. Jash Ajmera online by private video call from anywhere in India, in English, Hindi or Gujarati. Digital prescriptions and pan-India medicine delivery.",
+    "See psychiatrist Dr. Jash Ajmera by private video call from anywhere in India, in English, Hindi or Gujarati. Digital prescriptions, medicines delivered.",
   h1: "Online psychiatrist consultation, *anywhere in India*",
   eyebrow: "Online consultation · All India",
   summary:

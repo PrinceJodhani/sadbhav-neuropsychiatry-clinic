@@ -17,7 +17,8 @@ const crumbs = [
 
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy & Medical Disclaimer",
-  description: `How ${clinic.name} and this website handle your information, the third-party services used, and the medical disclaimer for information on this site.`,
+  description:
+    "How Sadbhav Neuropsychiatry Clinic and this website handle your information, the third-party services used, and our medical disclaimer.",
   path,
 });
 

@@ -33,10 +33,9 @@ const reviewCount = reviewsData.place_info.reviews;
 
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "Best Psychiatrist in Surat – Dr. Jash Ajmera | Sadbhav Neuropsychiatry Clinic, Vesu",
+    absolute: "Best Psychiatrist in Surat | Dr. Jash Ajmera, Sadbhav Clinic",
   },
-  description: `Best psychiatrist in Surat: Dr. Jash Ajmera (M.B.B.S., D.P.M.), Sadbhav Neuropsychiatry Clinic, Vesu. Confidential care for depression, anxiety, OCD, addiction & more, in Surat and online. Rated ${rating}★ (${reviewCount}+ reviews).`,
+  description: `Best psychiatrist in Surat: Dr. Jash Ajmera (MBBS, DPM) at Sadbhav Clinic, Vesu, for depression, anxiety, OCD & addiction. Rated ${rating}★ by ${reviewCount}+ patients.`,
   keywords:
     "psychiatrist in surat, best psychiatrist in surat, psychiatrist in vesu, top psychiatrist in surat, psychiatrist near me surat, dr jash ajmera, sadbhav neuropsychiatry clinic, mental health doctor surat, depression treatment surat, anxiety treatment surat, ocd treatment surat, bipolar treatment surat, de addiction centre surat, sexologist in surat, online psychiatrist india, psychiatrist in gujarat",
   alternates: {

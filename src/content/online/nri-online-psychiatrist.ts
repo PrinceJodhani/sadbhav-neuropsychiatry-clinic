@@ -7,9 +7,9 @@ const nriOnline: ContentPage = {
   name: "NRIs & international",
   tagline: "Gujarati and Hindi-speaking psychiatrist for Indians abroad",
   icon: Globe2,
-  title: "Indian Psychiatrist Online for NRIs – Gujarati & Hindi Speaking",
+  title: "Online Psychiatrist for NRIs – Gujarati & Hindi",
   description:
-    "Living in the USA, UK, Canada, Australia or the Gulf? Consult Indian psychiatrist Dr. Jash Ajmera online in Gujarati, Hindi or English — therapy, second opinions and family guidance.",
+    "In the USA, UK, Canada, Australia or Gulf? Consult Indian psychiatrist Dr. Jash Ajmera online in Gujarati, Hindi or English: therapy and second opinions.",
   h1: "An Indian psychiatrist online, *wherever you live*",
   eyebrow: "Online consultation · NRIs & international",
   summary:

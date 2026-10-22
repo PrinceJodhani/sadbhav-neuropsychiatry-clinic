@@ -7,9 +7,9 @@ const medicinesFacts: ContentPage = {
   name: "Psychiatric medicines: myths & facts",
   tagline: "Are they addictive? Side effects, safety and stopping",
   icon: Pill,
-  title: "Are Psychiatric Medicines Addictive? Myths, Side Effects & Facts",
+  title: "Are Psychiatric Medicines Addictive? The Facts",
   description:
-    "Are antidepressants addictive? Do psychiatric medicines damage the kidneys or have to be taken for life? A psychiatrist explains the facts about safety, side effects and stopping.",
+    "Are antidepressants addictive? Do psychiatric medicines damage kidneys or need to be taken for life? A psychiatrist explains safety and side effects.",
   h1: "Are psychiatric medicines *addictive?* Myths & facts",
   eyebrow: "Guide · Medicines",
   summary:

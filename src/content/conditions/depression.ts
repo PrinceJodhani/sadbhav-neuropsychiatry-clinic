@@ -7,7 +7,7 @@ const depression: ContentPage = {
   name: "Depression",
   tagline: "Persistent low mood, loss of interest and exhaustion",
   icon: CloudRain,
-  title: "Depression Treatment in Surat – Symptoms, Causes & Care",
+  title: "Depression Treatment in Surat: Symptoms & Care",
   description:
     "Learn the symptoms, causes and treatment of depression. Confidential depression treatment in Surat and online with psychiatrist Dr. Jash Ajmera (MBBS, DPM).",
   h1: "Depression treatment in *Surat* & online",

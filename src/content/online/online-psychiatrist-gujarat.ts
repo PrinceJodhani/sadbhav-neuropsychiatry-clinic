@@ -7,9 +7,9 @@ const onlineGujarat: ContentPage = {
   name: "Gujarat",
   tagline: "Consult in Gujarati from anywhere in Gujarat",
   icon: MapPinned,
-  title: "Online Psychiatrist in Gujarat – Consult in Gujarati",
+  title: "Online Psychiatrist in Gujarat – in Gujarati",
   description:
-    "Consult a Gujarati-speaking psychiatrist online from Ahmedabad, Vadodara, Rajkot, Bhavnagar, Jamnagar or anywhere in Gujarat. Dr. Jash Ajmera, M.B.B.S., D.P.M. — clinics in Surat & Ankleshwar.",
+    "Consult a Gujarati-speaking psychiatrist online from Ahmedabad, Vadodara, Rajkot or anywhere in Gujarat. Dr. Jash Ajmera, clinics in Surat & Ankleshwar.",
   h1: "Online psychiatrist for *Gujarat*, in Gujarati",
   eyebrow: "Online consultation · Gujarat",
   summary:

@@ -7,9 +7,9 @@ const helpingALovedOne: ContentPage = {
   name: "Helping a loved one",
   tagline: "How to talk to family about seeing a psychiatrist",
   icon: HandHeart,
-  title: "How to Convince Someone to See a Psychiatrist – A Family Guide",
+  title: "How to Convince Someone to See a Psychiatrist",
   description:
-    "Worried about a family member’s mental health or drinking? How to start the conversation, what to say and avoid, what to do if they refuse, and when to seek emergency help.",
+    "Worried about a family member’s mental health or drinking? How to start the talk, what to say, what to do if they refuse, and when to get help.",
   h1: "How to help a loved one *get mental health care*",
   eyebrow: "Guide · For families",
   summary:

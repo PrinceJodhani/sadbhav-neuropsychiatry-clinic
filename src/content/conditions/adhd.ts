@@ -7,9 +7,9 @@ const adhd: ContentPage = {
   name: "ADHD",
   tagline: "Inattention, restlessness and impulsivity in children and adults",
   icon: Zap,
-  title: "ADHD Treatment in Surat – Child & Adult ADHD Assessment",
+  title: "ADHD Treatment in Surat: Child & Adult ADHD",
   description:
-    "Trouble focusing, restlessness or impulsivity? Learn ADHD symptoms in children and adults, how ADHD is assessed and treated. ADHD assessment and treatment in Surat.",
+    "Trouble focusing, restlessness or impulsivity? ADHD symptoms in children and adults, and how ADHD is assessed and treated in Surat.",
   h1: "ADHD assessment & treatment in *Surat*",
   eyebrow: "Condition guide · ADHD",
   summary:

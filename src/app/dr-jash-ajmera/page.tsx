@@ -44,10 +44,10 @@ const crumbs = [
 ];
 
 export const metadata: Metadata = pageMetadata({
-  title: "Dr. Jash Ajmera – Psychiatrist & Psychotherapist in Surat | Profile",
+  title: "Dr. Jash Ajmera – Psychiatrist & Psychotherapist in Surat",
   absoluteTitle: true,
   description:
-    "Dr. Jash Ajmera (M.B.B.S., D.P.M. Psychiatry, F.I.P.S.) is a psychiatrist and psychotherapist in Surat practising since 2017. Qualifications, experience, approach, clinics and reviews.",
+    `Dr. Jash Ajmera (M.B.B.S., D.P.M., F.I.P.S.) is a psychiatrist and psychotherapist in Surat with ${clinic.doctor.yearsOfExperience} years of experience. Qualifications, clinics and reviews.`,
   path,
   type: "profile",
 });

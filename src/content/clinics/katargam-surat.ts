@@ -10,7 +10,7 @@ const katargam: ContentPage = {
   icon: Building2,
   title: "Psychiatrist in Katargam, Surat – Sunday Clinic",
   description:
-    "Dr. Jash Ajmera consults at the Katargam, Surat branch of Sadbhav Neuropsychiatry Clinic every Sunday, 11 AM–12 PM — convenient for Ved Road, Singanpore, Amroli, Varachha and Kapodra.",
+    "Dr. Jash Ajmera consults at the Katargam, Surat clinic every Sunday, 11 AM–12 PM. Convenient for Ved Road, Amroli, Varachha and Kapodra.",
   h1: "Psychiatrist in *Katargam*, Surat",
   eyebrow: "Branch clinic · Katargam, Surat",
   summary:

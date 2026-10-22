@@ -7,9 +7,9 @@ const postpartumDepression: ContentPage = {
   name: "Postpartum depression",
   tagline: "Depression and anxiety during pregnancy or after childbirth",
   icon: Baby,
-  title: "Postpartum Depression Treatment in Surat – Signs & Help",
+  title: "Postpartum Depression Treatment in Surat",
   description:
-    "Feeling low, anxious or overwhelmed after having a baby? Learn the signs of postpartum depression, how it differs from baby blues, and safe treatment in Surat and online.",
+    "Low, anxious or overwhelmed after having a baby? Signs of postpartum depression, baby blues vs depression, and safe treatment in Surat and online.",
   h1: "Postpartum depression treatment in *Surat* & online",
   eyebrow: "Condition guide · Women’s mental health",
   summary:

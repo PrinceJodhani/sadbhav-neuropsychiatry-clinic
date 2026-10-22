@@ -7,9 +7,9 @@ const bipolarDisorder: ContentPage = {
   name: "Bipolar disorder",
   tagline: "Episodes of extreme highs (mania) and lows",
   icon: Activity,
-  title: "Bipolar Disorder Treatment in Surat – Symptoms & Care",
+  title: "Bipolar Disorder: Symptoms & Treatment in Surat",
   description:
-    "Mood swings between mania and depression? Learn bipolar disorder symptoms, types and long-term treatment with mood stabilisers. Bipolar treatment in Surat and online.",
+    "Mood swings between mania and depression? Bipolar disorder symptoms, types and long-term treatment with mood stabilisers, in Surat and online.",
   h1: "Bipolar disorder treatment in *Surat* & online",
   eyebrow: "Condition guide · Bipolar disorder",
   summary:

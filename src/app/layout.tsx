@@ -35,12 +35,10 @@ const siteUrl = "https://psychiatristinsurat.in";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "Best Psychiatrist in Surat | Dr. Jash Ajmera – Sadbhav Neuropsychiatry Clinic",
+    default: "Best Psychiatrist in Surat | Dr. Jash Ajmera, Sadbhav Clinic",
     template: "%s | Dr. Jash Ajmera",
   },
-  description:
-    `Dr. Jash Ajmera (M.B.B.S., D.P.M.) is a leading psychiatrist in Surat at Sadbhav Neuropsychiatry Clinic, Vesu. Expert, confidential treatment for depression, anxiety, OCD, bipolar disorder, schizophrenia, addiction and more. Rated ${reviewsData.place_info.rating}★ by ${reviewsData.place_info.reviews}+ patients on Google. In-person in Surat & Ankleshwar, and online across India.`,
+  description: `Psychiatrist in Surat: Dr. Jash Ajmera (MBBS, DPM) at Sadbhav Neuropsychiatry Clinic, Vesu. In person in Surat & Ankleshwar and online. Rated ${reviewsData.place_info.rating}★.`,
   applicationName: "Sadbhav Neuropsychiatry Clinic",
   authors: [{ name: "Dr. Jash Ajmera", url: siteUrl }],
   creator: "Dr. Jash Ajmera",

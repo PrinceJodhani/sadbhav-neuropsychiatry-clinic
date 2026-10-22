@@ -7,9 +7,9 @@ const childAdolescent: ContentPage = {
   name: "Child & adolescent mental health",
   tagline: "Support for children, teenagers, students and parents",
   icon: Smile,
-  title: "Child & Teen Psychiatrist in Surat – Mental Health for Students",
+  title: "Child & Teen Psychiatrist in Surat",
   description:
-    "Help for children and teenagers in Surat with anxiety, low mood, exam stress, ADHD, anger, mobile or gaming addiction and school problems. Guidance for parents and schools.",
+    "Help for children and teens in Surat with anxiety, low mood, exam stress, ADHD, anger and mobile or gaming addiction, with guidance for parents.",
   h1: "Child & adolescent mental health care in *Surat*",
   eyebrow: "Treatment · Children, teens & young adults",
   summary:

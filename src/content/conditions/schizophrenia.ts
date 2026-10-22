@@ -7,9 +7,9 @@ const schizophrenia: ContentPage = {
   name: "Schizophrenia & psychosis",
   tagline: "Hearing voices, suspiciousness and losing touch with reality",
   icon: Brain,
-  title: "Schizophrenia Treatment in Surat – Symptoms of Psychosis",
+  title: "Schizophrenia & Psychosis Treatment in Surat",
   description:
-    "Hearing voices, suspiciousness or strange behaviour? Learn the signs of psychosis and schizophrenia and how early treatment helps. Schizophrenia treatment in Surat.",
+    "Hearing voices, suspiciousness or strange behaviour? Signs of psychosis and schizophrenia, and how early treatment helps. Treatment in Surat.",
   h1: "Schizophrenia & psychosis treatment in *Surat*",
   eyebrow: "Condition guide · Psychotic disorders",
   summary:

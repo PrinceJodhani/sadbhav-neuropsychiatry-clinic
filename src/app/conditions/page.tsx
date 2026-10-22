@@ -6,9 +6,9 @@ import { conditions, treatments } from "@/content";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Mental Health Conditions We Treat – Psychiatrist in Surat",
+  title: "Conditions We Treat – Psychiatrist in Surat",
   description:
-    "Depression, anxiety, panic attacks, OCD, bipolar disorder, schizophrenia, addiction, insomnia, ADHD and more — symptoms, causes and treatment with Dr. Jash Ajmera in Surat and online.",
+    "Depression, anxiety, panic, OCD, bipolar disorder, schizophrenia, addiction, insomnia, ADHD and more: symptoms and treatment in Surat and online.",
   path: "/conditions",
 });
 

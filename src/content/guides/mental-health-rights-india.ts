@@ -7,7 +7,7 @@ const rights: ContentPage = {
   name: "Your mental health rights",
   tagline: "Confidentiality, insurance and the Mental Healthcare Act",
   icon: ShieldCheck,
-  title: "Mental Health Rights in India – Confidentiality, Insurance & MHCA 2017",
+  title: "Mental Health Rights in India (MHCA 2017)",
   description:
     "Is psychiatric treatment confidential in India? Does health insurance cover mental illness? Your rights under the Mental Healthcare Act, 2017, explained simply.",
   h1: "Your mental health rights in *India*",

@@ -7,9 +7,9 @@ const whenToSeeAPsychiatrist: ContentPage = {
   name: "When to see a psychiatrist",
   tagline: "12 signs it’s time to get professional help",
   icon: Signpost,
-  title: "When to See a Psychiatrist – 12 Signs You Shouldn’t Ignore",
+  title: "When to See a Psychiatrist: 12 Warning Signs",
   description:
-    "How do you know when to see a psychiatrist? 12 warning signs in adults, teenagers and older adults, what stops people from getting help, and how to book a confidential consultation.",
+    "How do you know when to see a psychiatrist? 12 warning signs in adults, teens and older adults, and how to book a confidential consultation.",
   h1: "When to see a psychiatrist: *12 signs* not to ignore",
   eyebrow: "Guide · Getting help",
   summary:

@@ -9,7 +9,7 @@ const personalityDisorders: ContentPage = {
   icon: Fingerprint,
   title: "Personality Disorder & BPD Treatment in Surat",
   description:
-    "Intense emotions, fear of abandonment, impulsivity or self-harm? Learn about borderline and other personality disorders and how therapy helps. Treatment in Surat and online.",
+    "Intense emotions, fear of abandonment or self-harm? Borderline and other personality disorders, and how therapy helps. Treatment in Surat and online.",
   h1: "Personality disorder & BPD treatment in *Surat*",
   eyebrow: "Condition guide · Personality",
   summary:
